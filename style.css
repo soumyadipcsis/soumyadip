@@ -1,0 +1,43 @@
+.moreGap { line-height: 120%; }
+
+h1
+{
+text-align:center;
+font-family:verdana;
+}
+
+body 
+{
+background-color: 	#D4A017;
+background-image:url('img_paper');
+background-repeat:repeat;
+/*background-attachment:fixed;
+background-position: center;*/
+}
+
+p
+{
+text-align: justify;
+font-family: arial;
+/*font-size: 15px;*/
+}
+
+ul
+{
+text-align: justify;
+font-family: helvetica;
+/*font-size: 15px;*/
+}
+li
+{
+text-align:justify;
+font-family:arial;
+line-height: 120%;
+}
+
+a:link { color:blue; }
+a:visited { color:blue; }
+a:hover { color:blue; font-size:120%; }
+a:active { color:blue; }
+</style>
+

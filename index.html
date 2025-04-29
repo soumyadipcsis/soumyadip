@@ -2,133 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="theme-color" content="#1a5276">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dr. Soumyadip Bandyopadhyay</title>
-  
   <style>
-    /* Your styles (no change needed mostly) */
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-      margin: 20px;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
       background-color: #f4f4f9;
       color: #2c3e50;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
-    h1 {
+    header {
+      background-color: #1a5276;
+      padding: 10px 0;
+      text-align: center;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav {
+      background-color: #2e86c1;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 10px 0;
+      position: sticky;
+      top: 60px;
+      z-index: 999;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 15px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    nav a:hover {
+      background-color: #1a5276;
+      border-radius: 5px;
+    }
+    section {
+      padding: 50px 20px;
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    h2 {
       text-align: center;
       color: #1a5276;
     }
     img {
-    display: block;      /* Make it a block element */
-    margin: 0 auto;      /* Auto margins to center */
-    max-width: 20%;      /* Keep your 20% max width */
-    height: auto;        /* Maintain aspect ratio */
-    }
-    
-    .tabs {
-      display: flex;
-      flex-wrap: wrap; /* Important for smaller devices */
-      border-bottom: 2px solid #ddd;
-      margin-bottom: 20px;
-    }
-    .tab {
-      padding: 10px 20px;
-      cursor: pointer;
-      background-color: #e8eef3;
-      border: 1px solid #ddd;
-      border-bottom: none;
-      margin-right: 5px;
-      border-radius: 8px 8px 0 0;
-      font-weight: bold;
-      user-select: none;
-      transition: background-color 0.3s ease;
-    }
-    .tab:hover {
-      background-color: #d6e0ea;
-    }
-    .tab.active {
-      background-color: #ffffff;
-      color: #1a5276;
-      border-bottom: 2px solid #ffffff;
-    }
-    .tab-content {
-      display: none;
-      background-color: #ffffff;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-radius: 0 0 8px 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      animation: fadeIn 0.5s ease;
-    }
-    .tab-content.active {
       display: block;
+      margin: 20px auto;
+      max-width: 150px;
+      border-radius: 50%;
     }
     footer {
       text-align: center;
-      margin-top: 20px;
+      padding: 20px;
       font-size: 0.9em;
       color: #6c757d;
+      background-color: #f4f4f9;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    html {
+      scroll-behavior: smooth;
     }
   </style>
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      function showTab(tabId) {
-        // Hide all contents
-        document.querySelectorAll('.tab-content').forEach(tab => {
-          tab.classList.remove('active');
-        });
-        // Deactivate all tabs
-        document.querySelectorAll('.tab').forEach(tab => {
-          tab.classList.remove('active');
-        });
-        // Activate clicked
-        document.getElementById(tabId).classList.add('active');
-        document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
-      }
-      
-      // Attach event listeners dynamically
-      document.querySelectorAll('.tab').forEach(tab => {
-        tab.addEventListener('click', function () {
-          showTab(this.getAttribute('data-tab'));
-        });
-      });
-    });
-  </script>
 </head>
 <body>
-    <img src="sb_PIC.jpg" alt="Dr. Soumyadip Bandyopadhyay">
-    <h1>Dr. Soumyadip Bandyopadhyay</h1>
 
-    <!-- Tabs -->
-    <div class="tabs">
-        <div class="tab active" data-tab="aboutme" onclick="showTab('aboutme')">About Me</div>
-        <div class="tab" data-tab="education" onclick="showTab('education')">Education</div>
-        <div class="tab" data-tab="work" onclick="showTab('work')">Work Experience</div>
-        <div class="tab" data-tab="research" onclick="showTab('research')">Research Interests</div>
-        <div class="tab" data-tab="researchshowcase" onclick="showTab('researchshowcase')">Research Showcase </div>
-        <div class="tab" data-tab="projects" onclick="showTab('projects')">Projects</div>
-        <div class="tab" data-tab="honours" onclick="showTab('honours')">Honours and Awards</div>
-        <div class="tab" data-tab="activities" onclick="showTab('activities')">Professional Activities</div>
-        <div class="tab" data-tab="teaching" onclick="showTab('teaching')">Teaching at BITS Goa</div>
-        <div class="tab" data-tab="contact" onclick="showTab('contact')">Contact Information</div>
-    </div>
+<header>
+  <img src="sb_PIC.jpg" alt="Dr. Soumyadip Bandyopadhyay">
+  <h1>Dr. Soumyadip Bandyopadhyay</h1>
+</header>
 
+<nav>
+  <a href="#aboutme">About Me</a>
+  <a href="#education">Education</a>
+  <a href="#work">Work Experience</a>
+  <a href="#research">Research Interests</a>
+  <a href="#researchshowcase">Research Showcase</a>
+  <a href="#projects">Projects</a>
+  <a href="#honours">Honours and Awards</a>
+  <a href="#activities">Professional Activities</a>
+  <a href="#teaching">Teaching</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<main>
     <!-- Tab Contents -->
        
     <div id="aboutme" class="tab-content active">
       
-<section id="about-me" style="font-size: 18px; line-height: 1.7; font-family: Arial, sans-serif; margin: 20px;">
-  <h2 style="font-size: 28px; text-align: center;">About Me</h2>
+ <section id="aboutme">
+   <h2>About Me</h2>
     <p>
         Hello! I am <strong>Soumyadip Bandyopadhyay</strong>, currently working as a <strong>Scientist</strong> at the 
         <strong>ABB Corporate Research Lab</strong> since July 2023. My current research focuses on the 
@@ -177,11 +148,10 @@
 
 
 
-    </div>
     
    
 
-    <div id="education" class="tab-content">
+   <section id="education">
         <h2>Education</h2>
         <p><strong>Indian Institute of Technology, Kharagpur, West Bengal, India</strong> (2009–2017)</p>
         <ul>
@@ -199,9 +169,9 @@
             <li>B.Tech in Computer Science and Engineering</li>
           
         </ul>
-    </div>
+    </section>
 
-    <div id="work" class="tab-content">
+   <section id="work">
         <h2>Work Experience</h2>
         <ul>
             <li>Research Scientist, ABB Corporate Research (July 2023 – Present)</li>
@@ -210,9 +180,9 @@
             <li>Post-Doctoral Fellow, System Analysis and Modeling Group, Hasso Plattner Institute, Germany (Aug 2017 – Oct 2018)</li>
             <li>Assistant Professor, BITS Pilani K K Birla Goa Campus (Dec 2016 – July 2017)</li>
         </ul>
-    </div>
+    </section>
 
-    <div id="research" class="tab-content">
+     <section id="research">
         <h2>Research Interests</h2>
         <ul>
             <li>Formal Methods</li>
@@ -225,8 +195,8 @@
             <li>Model-Driven Engineering</li>
         </ul>
              
-    </div>
-       <div id="researchshowcase" class="tab-content">
+    </section>
+        <section id="researchshowcase">
         <h2>Journal Publications</h2>
         <ul>
             <li><strong>Soumyadip Badyopadhyay</strong>, Dipankar Sarkar, Chittaranjan Mandal, Holger Giese, "Translation Validation of Coloured Petri Net Models of Programs on Integers", <strong>Acta Informatica</strong>, Vol. 59, Issue: 3, Pages: 725-759</li>
@@ -307,8 +277,8 @@
     
   </ul>
 
-    </div>
-    <div id="honours" class="tab-content">
+    </section>
+    <section id="honours">
         <h2>Honours and Awards</h2>
         <ul>
             <li>Best Paper, ICSOFT 2021</li>
@@ -317,9 +287,10 @@
             <li>TCS Innovation Lab Research Fellowship, 2012</li>
             <li>Czech Republic Scholarship, 2007</li>
         </ul>
-    </div>
+    </section>
 
-    <div id="activities" class="tab-content">
+   
+  <section id="activities">
         <h2>Professional Activities</h2>
         <ul>
             <li>Reviewer at CAV-2014, EMSOFT-2015, DAC 2020, ACM TOSEAM, Acta Informatica</li>
@@ -327,11 +298,11 @@
             <li>Senior IEEE Member, ACM Member, INSTICC Member</li>
             <li>Co-chair, PERR 2022 (co-located with FLOC 2022)</li>
         </ul>
-    </div>
+    </section>
 
   
    <!-- Tab Contents -->
-    <div id="projects" class="tab-content">
+     <section id="projects">
         <h2>Sponsored and Consultancy Projects</h2>
         <ul>
             <li>"APP based learning for Python program"  
@@ -374,10 +345,10 @@
                 </ul>
             </li>
         </ul>
-    </div>
+    </section>
  <!-- Tab Content -->
-    <div id="teaching" class="tab-content">
-        <h2>Teaching at BITS Goa</h2>
+ <section id="teaching">
+        <h2>Teaching </h2>
         <ul>
             <li>Compiler Construction (Spring 2019, 2020, 2022)</li>
             <li>Theory of Computation (Autumn 2019)</li>
@@ -385,9 +356,9 @@
             <li>Data Structure and Algorithm (Spring 2022)</li>
             <li>Computer Architecture (Autumn 2020)</li>
         </ul>
-    </div>
+    </section>
 
-     <div id="contact" class="tab-content">
+     <section id="teaching">
         <h2>Contact Information</h2>
         <p><strong>Scientist</strong></p>
         <p>Mobile: +91 8900270263</p>
@@ -395,7 +366,8 @@
         Official Email: <a href="mailto:soumyadip.bandyopadhyay@in.abb.com">soumyadip.bandyopadhyay@in.abb.com</a></p>
         <p>Country: India<br>
         Personal Email: <a href="mailto:soumyadipcse@gmail.com">soumyadipcse@gmail.com</a></p>
-    </div>
+    </section>
+      </main>
     <footer>
         <p>© 2025 Dr. Soumyadip Bandyopadhyay. All Rights Reserved.</p>
     </footer>

@@ -2,41 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Responsive Sidebar Menu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Dr. Soumyadip Bandyopadhyay</title>
   <style>
-    .moreGap { line-height: 120%; }
-
-    h1 {
-      text-align: center;
-      font-family: verdana;
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
     }
 
     body {
-      margin: 0;
       display: flex;
-      min-height: 100vh;
-      font-family: arial;
-      background-color: #D4A017;
-      background-image: url('img_paper');
-      background-repeat: repeat;
-    }
-
-    p, ul, li {
-      text-align: justify;
-      line-height: 120%;
-    }
-
-    ul {
-      font-family: helvetica;
-    }
-
-    a:link, a:visited, a:hover, a:active {
-      color: blue;
-    }
-
-    a:hover {
-      font-size: 120%;
+      flex-direction: row;
+      height: 100vh;
+      overflow: hidden;
     }
 
     aside {
@@ -51,43 +31,80 @@
       overflow-y: auto;
       position: fixed;
       z-index: 2;
-      box-sizing: border-box;
+    }
+
+    aside img {
+      width: 100px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    aside h1 {
+      font-size: 1.1rem;
+      text-align: center;
+      margin: 10px 0 20px;
+      padding: 0 10px;
     }
 
     nav {
-      display: flex;
-      flex-direction: column;
       width: 100%;
     }
 
     nav a {
-      padding: 15px 10px;
-      text-decoration: none;
+      display: block;
       color: white;
-      text-align: center;
+      text-decoration: none;
+      padding: 12px 20px;
       transition: background 0.3s;
-      border-bottom: 1px solid #1b4f72;
+      cursor: pointer;
     }
 
-    nav a:hover {
-      background-color: #1b4f72;
+    nav a:hover,
+    nav a.active {
+      background-color: #1a5276;
     }
 
     .content-area {
       margin-left: 250px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    main {
+      flex: 1;
+      overflow-y: auto;
       padding: 20px;
-      flex-grow: 1;
-      background-color: white;
-      min-height: 100vh;
+      background-color: #f4f4f9;
+    }
+
+    section {
+      display: none;
+      min-height: 100%;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       box-sizing: border-box;
     }
 
-    .content-section {
-      display: none;
+    section.active {
+      display: block;
     }
 
-    .content-section.active {
-      display: block;
+    h2 {
+      color: #1a5276;
+      margin-top: 0;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 0.85em;
+      background-color: #f4f4f9;
+      color: #6c757d;
     }
 
     @media (max-width: 768px) {
@@ -99,35 +116,47 @@
         position: relative;
         width: 100%;
         height: auto;
-        max-height: 40vh;
-        overflow-y: auto;
-        flex-wrap: wrap;
         flex-direction: row;
+        flex-wrap: wrap;
         justify-content: center;
-        padding: 5px;
+        padding: 10px 0;
+      }
+
+      aside img {
+        display: none;
+      }
+
+      aside h1 {
+        display: none;
       }
 
       nav {
-        flex-direction: row;
+        display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        width: 100%;
       }
 
       nav a {
-        flex: 1 1 45%;
-        text-align: center;
+        flex: 1 1 auto;
+        padding: 10px;
         font-size: 0.9rem;
+        text-align: center;
       }
 
       .content-area {
         margin-left: 0;
         width: 100%;
       }
+
+      section {
+        padding: 15px;
+        border-radius: 0;
+      }
     }
   </style>
 </head>
 <body>
-
 
 <aside>
   <img src="sb_PIC.jpg" alt="Dr. Soumyadip Bandyopadhyay" />

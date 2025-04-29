@@ -393,5 +393,27 @@
     <footer>
         <p>© 2025 Dr. Soumyadip Bandyopadhyay. All Rights Reserved.</p>
     </footer>
+  <script>
+  const menuItems = document.querySelectorAll('.menu-item');
+  const sections = document.querySelectorAll('main section');
+
+  menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+      // Remove 'active' class from all menu items
+      menuItems.forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+
+      // Hide all sections
+      sections.forEach(section => section.classList.remove('active'));
+
+      // Show target section
+      const targetId = item.getAttribute('data-target');
+      const targetSection = document.getElementById(targetId);
+      if (targetSection) {
+        targetSection.classList.add('active');
+      }
+    });
+  });
+</script>
 </body>
 </html>

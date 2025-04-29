@@ -5,11 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dr. Soumyadip Bandyopadhyay</title>
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      height: 100%;
       font-family: Arial, sans-serif;
+    }
+
+    body {
       display: flex;
-      height: 100vh;
       overflow: hidden;
     }
 
@@ -22,7 +26,7 @@
       align-items: center;
       padding: 20px 0;
       position: fixed;
-      height: 100vh;
+      height: 100%;
       overflow-y: auto;
     }
 
@@ -57,23 +61,29 @@
       background-color: #1a5276;
     }
 
-    main {
+    .content-area {
       margin-left: 250px;
-      padding: 20px;
-      flex: 1;
-      overflow-y: auto;
-      background-color: #f4f4f9;
       display: flex;
       flex-direction: column;
+      height: 100vh;
+      width: calc(100% - 250px);
+    }
+
+    main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      background-color: #f4f4f9;
     }
 
     section {
       display: none;
-      flex: 1;
+      min-height: 100%;
       background: white;
       padding: 30px;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-sizing: border-box;
     }
 
     section.active {
@@ -92,7 +102,6 @@
       font-size: 0.85em;
       color: #6c757d;
       background-color: #f4f4f9;
-      margin-left: 250px;
     }
   </style>
 </head>
@@ -114,6 +123,8 @@
     <a class="menu-item" data-target="contact">Contact</a>
   </nav>
 </aside>
+
+<div class="content-area">
 
 <main>
     <!-- Tab Contents -->
@@ -393,6 +404,7 @@
     <footer>
         <p>© 2025 Dr. Soumyadip Bandyopadhyay. All Rights Reserved.</p>
     </footer>
+  </div>
   <script>
   const menuItems = document.querySelectorAll('.menu-item');
   const sections = document.querySelectorAll('main section');

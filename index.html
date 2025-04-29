@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dr. Soumyadip Bandyopadhyay</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
+      font-family: Arial, sans-serif;
       display: flex;
       height: 100vh;
       overflow: hidden;
     }
+
     aside {
       width: 250px;
       background-color: #2e86c1;
-      padding-top: 20px;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
       position: fixed;
-      height: 100%;
+      height: 100vh;
       overflow-y: auto;
     }
+
     aside img {
-      display: block;
-      margin: 0 auto 10px;
       width: 120px;
       border-radius: 50%;
+      margin-bottom: 10px;
     }
+
     aside h1 {
-      color: white;
-      font-size: 1.2em;
+      font-size: 1.2rem;
       text-align: center;
-      margin-bottom: 30px;
       padding: 0 10px;
+      margin-bottom: 20px;
     }
-    aside nav a {
+
+    nav {
+      width: 100%;
+    }
+
+    nav a {
       display: block;
       color: white;
       text-decoration: none;
@@ -41,31 +51,41 @@
       transition: background 0.3s;
       cursor: pointer;
     }
-    aside nav a:hover, aside nav a.active {
+
+    nav a:hover,
+    nav a.active {
       background-color: #1a5276;
     }
+
     main {
       margin-left: 250px;
       padding: 20px;
       flex: 1;
       overflow-y: auto;
       background-color: #f4f4f9;
+      display: flex;
+      flex-direction: column;
     }
+
     section {
       display: none;
+      flex: 1;
       background: white;
       padding: 30px;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
+
     section.active {
       display: block;
     }
+
     h2 {
       color: #1a5276;
       margin-top: 0;
       text-align: center;
     }
+
     footer {
       text-align: center;
       padding: 15px;
@@ -79,7 +99,7 @@
 <body>
 
 <aside>
-  <img src="sb_PIC.jpg" alt="Dr. Soumyadip Bandyopadhyay">
+  <img src="sb_PIC.jpg" alt="Dr. Soumyadip Bandyopadhyay" />
   <h1>Dr. Soumyadip Bandyopadhyay</h1>
   <nav>
     <a class="menu-item active" data-target="aboutme">About Me</a>
@@ -98,9 +118,9 @@
 <main>
     <!-- Tab Contents -->
        
-    <div id="aboutme" class="tab-content active">
+
       
- <section id="aboutme">
+ <section id="aboutme" class="active">
    <h2>About Me</h2>
     <p>
         Hello! I am <strong>Soumyadip Bandyopadhyay</strong>, currently working as a <strong>Scientist</strong> at the 

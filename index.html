@@ -9,9 +9,8 @@
       font-family: Arial, sans-serif;
       margin: 0;
       display: flex;
-      min-height: 100vh;
-      background-color: #f4f4f9;
-      color: #2c3e50;
+      height: 100vh;
+      overflow: hidden;
     }
     aside {
       width: 250px;
@@ -40,22 +39,27 @@
       text-decoration: none;
       padding: 12px 20px;
       transition: background 0.3s;
+      cursor: pointer;
     }
-    aside nav a:hover {
+    aside nav a:hover, aside nav a.active {
       background-color: #1a5276;
     }
     main {
       margin-left: 250px;
       padding: 20px;
       flex: 1;
-      overflow: hidden;
+      overflow-y: auto;
+      background-color: #f4f4f9;
     }
     section {
+      display: none;
       background: white;
-      padding: 40px;
-      margin-bottom: 20px;
+      padding: 30px;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    section.active {
+      display: block;
     }
     h2 {
       color: #1a5276;
@@ -64,14 +68,11 @@
     }
     footer {
       text-align: center;
-      padding: 20px;
-      font-size: 0.9em;
+      padding: 15px;
+      font-size: 0.85em;
       color: #6c757d;
       background-color: #f4f4f9;
       margin-left: 250px;
-    }
-    html {
-      scroll-behavior: smooth;
     }
   </style>
 </head>
@@ -81,16 +82,16 @@
   <img src="sb_PIC.jpg" alt="Dr. Soumyadip Bandyopadhyay">
   <h1>Dr. Soumyadip Bandyopadhyay</h1>
   <nav>
-    <a href="#aboutme">About Me</a>
-    <a href="#education">Education</a>
-    <a href="#work">Work Experience</a>
-    <a href="#research">Research Interests</a>
-    <a href="#researchshowcase">Research Showcase</a>
-    <a href="#projects">Projects</a>
-    <a href="#honours">Honours and Awards</a>
-    <a href="#activities">Professional Activities</a>
-    <a href="#teaching">Teaching</a>
-    <a href="#contact">Contact</a>
+    <a class="menu-item active" data-target="aboutme">About Me</a>
+    <a class="menu-item" data-target="education">Education</a>
+    <a class="menu-item" data-target="work">Work Experience</a>
+    <a class="menu-item" data-target="research">Research Interests</a>
+    <a class="menu-item" data-target="researchshowcase">Research Showcase</a>
+    <a class="menu-item" data-target="projects">Projects</a>
+    <a class="menu-item" data-target="honours">Honours and Awards</a>
+    <a class="menu-item" data-target="activities">Professional Activities</a>
+    <a class="menu-item" data-target="teaching">Teaching</a>
+    <a class="menu-item" data-target="contact">Contact</a>
   </nav>
 </aside>
 

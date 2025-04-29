@@ -1,59 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dr. Soumyadip Bandyopadhyay</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: Arial, sans-serif;
-      overflow-x: hidden;
-    }
-
     body {
+      font-family: Arial, sans-serif;
+      margin: 0;
       display: flex;
-      flex-direction: row;
       height: 100vh;
       overflow: hidden;
     }
-
     aside {
       width: 250px;
       background-color: #2e86c1;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px 0;
-      height: 100vh;
-      overflow-y: auto;
+      padding-top: 20px;
       position: fixed;
-      z-index: 2;
-      -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+      height: 100%;
+      overflow-y: auto;
     }
-
     aside img {
-      width: 100px;
+      display: block;
+      margin: 0 auto 10px;
+      width: 120px;
       border-radius: 50%;
-      margin-bottom: 10px;
     }
-
     aside h1 {
-      font-size: 1.1rem;
+      color: white;
+      font-size: 1.2em;
       text-align: center;
-      margin: 10px 0 20px;
+      margin-bottom: 30px;
       padding: 0 10px;
     }
-
-    nav {
-      width: 100%;
-    }
-
-    nav a {
+    aside nav a {
       display: block;
       color: white;
       text-decoration: none;
@@ -61,108 +41,45 @@
       transition: background 0.3s;
       cursor: pointer;
     }
-
-    nav a:hover,
-    nav a.active {
+    aside nav a:hover, aside nav a.active {
       background-color: #1a5276;
     }
-
-    .content-area {
-      margin-left: 250px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
-
     main {
+      margin-left: 250px;
+      padding: 20px;
       flex: 1;
       overflow-y: auto;
-      padding: 20px;
       background-color: #f4f4f9;
     }
-
     section {
       display: none;
-      min-height: 100%;
       background: white;
-      padding: 20px;
+      padding: 30px;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      box-sizing: border-box;
     }
-
     section.active {
       display: block;
     }
-
     h2 {
       color: #1a5276;
       margin-top: 0;
       text-align: center;
     }
-
     footer {
       text-align: center;
-      padding: 10px;
+      padding: 15px;
       font-size: 0.85em;
-      background-color: #f4f4f9;
       color: #6c757d;
-    }
-
-    @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-      }
-
-      aside {
-        position: relative;
-        width: 100%;
-        height: auto;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 10px 0;
-      }
-
-      aside img {
-        display: none;
-      }
-
-      aside h1 {
-        display: none;
-      }
-
-      nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        width: 100%;
-      }
-
-      nav a {
-        flex: 1 1 auto;
-        padding: 10px;
-        font-size: 0.9rem;
-        text-align: center;
-      }
-
-      .content-area {
-        margin-left: 0;
-        width: 100%;
-      }
-
-      section {
-        padding: 15px;
-        border-radius: 0;
-      }
+      background-color: #f4f4f9;
+      margin-left: 250px;
     }
   </style>
 </head>
 <body>
 
 <aside>
-  <img src="sb_PIC.jpg" alt="Dr. Soumyadip Bandyopadhyay" />
+  <img src="sb_PIC.jpg" alt="Dr. Soumyadip Bandyopadhyay">
   <h1>Dr. Soumyadip Bandyopadhyay</h1>
   <nav>
     <a class="menu-item active" data-target="aboutme">About Me</a>
@@ -171,12 +88,14 @@
     <a class="menu-item" data-target="research">Research Interests</a>
     <a class="menu-item" data-target="researchshowcase">Research Showcase</a>
     <a class="menu-item" data-target="projects">Projects</a>
-    <a class="menu-item" data-target="honours">Honours & Awards</a>
+    <a class="menu-item" data-target="honours">Honours and Awards</a>
     <a class="menu-item" data-target="activities">Professional Activities</a>
     <a class="menu-item" data-target="teaching">Teaching</a>
     <a class="menu-item" data-target="contact">Contact</a>
   </nav>
 </aside>
+
+<main>
 
 <div class="content-area">
 
@@ -450,27 +369,25 @@
         <p>Country: India<br>
         Personal Email: <a href="mailto:soumyadipcse@gmail.com">soumyadipcse@gmail.com</a></p>
     </section>
-
+</main>
     <footer>
         <p>© 2025 Dr. Soumyadip Bandyopadhyay. All Rights Reserved.</p>
     </footer>
   </div>
 <script>
-  document.querySelectorAll('.menu-item').forEach(item => {
-    item.addEventListener('click', function() {
-      // Remove 'active' class from all menu items
-      document.querySelectorAll('.menu-item').forEach(link => link.classList.remove('active'));
-      this.classList.add('active');
+const menuItems = document.querySelectorAll('.menu-item');
+  const sections = document.querySelectorAll('main section');
 
-      // Hide all sections
-      document.querySelectorAll('section').forEach(section => section.classList.remove('active'));
+  menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+      // Remove active class from all menu items and sections
+      menuItems.forEach(i => i.classList.remove('active'));
+      sections.forEach(section => section.classList.remove('active'));
 
-      // Show target section
-      const targetId = this.getAttribute('data-target');
-      const targetSection = document.getElementById(targetId);
-      if (targetSection) {
-        targetSection.classList.add('active');
-      }
+      // Add active class to clicked menu item and corresponding section
+      item.classList.add('active');
+      const targetId = item.getAttribute('data-target');
+      document.getElementById(targetId).classList.add('active');
     });
   });
 </script>

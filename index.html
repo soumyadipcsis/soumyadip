@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Dr. Soumyadip Bandyopadhyay</title>
   <style>
     html, body {
@@ -14,6 +14,8 @@
 
     body {
       display: flex;
+      flex-direction: row;
+      height: 100vh;
       overflow: hidden;
     }
 
@@ -25,22 +27,23 @@
       flex-direction: column;
       align-items: center;
       padding: 20px 0;
-      position: fixed;
-      height: 100%;
+      height: 100vh;
       overflow-y: auto;
+      position: fixed;
+      z-index: 2;
     }
 
     aside img {
-      width: 120px;
+      width: 100px;
       border-radius: 50%;
       margin-bottom: 10px;
     }
 
     aside h1 {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       text-align: center;
+      margin: 10px 0 20px;
       padding: 0 10px;
-      margin-bottom: 20px;
     }
 
     nav {
@@ -63,10 +66,10 @@
 
     .content-area {
       margin-left: 250px;
+      flex: 1;
       display: flex;
       flex-direction: column;
       height: 100vh;
-      width: calc(100% - 250px);
     }
 
     main {
@@ -80,7 +83,7 @@
       display: none;
       min-height: 100%;
       background: white;
-      padding: 30px;
+      padding: 20px;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       box-sizing: border-box;
@@ -98,10 +101,58 @@
 
     footer {
       text-align: center;
-      padding: 15px;
+      padding: 10px;
       font-size: 0.85em;
-      color: #6c757d;
       background-color: #f4f4f9;
+      color: #6c757d;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      aside {
+        position: relative;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px 0;
+      }
+
+      aside img {
+        display: none;
+      }
+
+      aside h1 {
+        display: none;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+      }
+
+      nav a {
+        flex: 1 1 auto;
+        padding: 10px;
+        font-size: 0.9rem;
+        text-align: center;
+      }
+
+      .content-area {
+        margin-left: 0;
+        width: 100%;
+      }
+
+      section {
+        padding: 15px;
+        border-radius: 0;
+      }
     }
   </style>
 </head>
@@ -117,7 +168,7 @@
     <a class="menu-item" data-target="research">Research Interests</a>
     <a class="menu-item" data-target="researchshowcase">Research Showcase</a>
     <a class="menu-item" data-target="projects">Projects</a>
-    <a class="menu-item" data-target="honours">Honours and Awards</a>
+    <a class="menu-item" data-target="honours">Honours & Awards</a>
     <a class="menu-item" data-target="activities">Professional Activities</a>
     <a class="menu-item" data-target="teaching">Teaching</a>
     <a class="menu-item" data-target="contact">Contact</a>

@@ -1,100 +1,43 @@
+<style>
+.moreGap { line-height: 120%; }
 
-
-.moreGap { 
-  line-height: 120%; 
+h1
+{
+text-align:center;
+font-family:verdana;
 }
 
-h1 {
-  text-align: center;
-  font-family: Verdana, sans-serif;
+body 
+{
+background-color: 	#D4A017;
+background-image:url('img_paper');
+background-repeat:repeat;
+/*background-attachment:fixed;
+background-position: center;*/
 }
 
-body {
-  background-color: #D4A017;
-  background-image: url('img_paper'); /* Ensure this image exists */
-  background-repeat: repeat;
-  /* Uncomment below for fixed background or centered positioning if needed */
-  /* background-attachment: fixed; */
-  /* background-position: center; */
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+p
+{
+text-align: justify;
+font-family: arial;
+/*font-size: 15px;*/
 }
 
-p {
-  text-align: justify;
-  font-family: Arial, sans-serif;
-  font-size: 15px; /* Ensure uniform font size */
+ul
+{
+text-align: justify;
+font-family: helvetica;
+/*font-size: 15px;*/
+}
+li
+{
+text-align:justify;
+font-family:arial;
+line-height: 120%;
 }
 
-ul, li {
-  text-align: justify;
-  font-family: Helvetica, sans-serif;
-  line-height: 120%;
-  margin: 0;
-  padding: 0;
-}
-
-a:link {
-  color: blue;
-  text-decoration: none; /* Remove underline for links */
-}
-
-a:visited {
-  color: blue;
-}
-
-a:hover {
-  color: blue;
-  font-size: 120%; /* Increase font size slightly on hover */
-  text-decoration: underline; /* Add underline for hover effect */
-}
-
-a:active {
-  color: blue;
-}
-
-/* Menu Styling */
-nav {
-  background-color: #2e86c1; /* Dark blue background for the menu */
-  color: white;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 10px 0;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  padding: 10px 15px;
-  font-size: 1rem;
-  font-family: Arial, sans-serif;
-  transition: all 0.3s ease; /* Smooth transition for hover effects */
-}
-
-nav a:hover,
-nav a.active {
-  background-color: #1a5276; /* Highlight menu item on hover */
-  border-radius: 5px;
-}
-
-.menu-item {
-  cursor: pointer;
-}
-
-/* Responsive Menu for Smaller Screens */
-@media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  nav a {
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-  }
-}
-
+a:link { color:blue; }
+a:visited { color:blue; }
+a:hover { color:blue; font-size:120%; }
+a:active { color:blue; }
+</style>

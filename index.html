@@ -4,211 +4,459 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Dr. Soumyadip Bandyopadhyay</title>
-  <link rel="stylesheet" href="creative-style.css" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    aside {
+      width: 250px;
+      background-color: #2e86c1;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+      height: 100vh;
+      overflow-y: auto;
+      position: fixed;
+      z-index: 2;
+    }
+
+    aside img {
+      width: 100px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    aside h1 {
+      font-size: 1.1rem;
+      text-align: center;
+      margin: 10px 0 20px;
+      padding: 0 10px;
+    }
+
+    nav {
+      width: 100%;
+    }
+
+    nav a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      padding: 12px 20px;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background-color: #1a5276;
+    }
+
+    .content-area {
+      margin-left: 250px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      background-color: #f4f4f9;
+    }
+
+    section {
+      display: none;
+      min-height: 100%;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-sizing: border-box;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    h2 {
+      color: #1a5276;
+      margin-top: 0;
+      text-align: left; /* Changed from center to left */
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 0.85em;
+      background-color: #f4f4f9;
+      color: #6c757d;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      aside {
+        position: relative;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px 0;
+      }
+
+      aside img {
+        display: none;
+      }
+
+      aside h1 {
+        display: none;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+      }
+
+      nav a {
+        flex: 1 1 auto;
+        padding: 10px;
+        font-size: 0.9rem;
+        text-align: center;
+      }
+
+      .content-area {
+        margin-left: 0;
+        width: 100%;
+      }
+
+      section {
+        padding: 15px;
+        border-radius: 0;
+      }
+    }
+  </style>
 </head>
 <body>
+
 <aside>
   <img src="sb_PIC.jpg" alt="Dr. Soumyadip Bandyopadhyay" />
   <h1>Dr. Soumyadip Bandyopadhyay</h1>
   <nav>
     <a class="menu-item active" data-target="aboutme">About Me</a>
-    <a class="menu-item" data-target="education">Education & Work</a>
-    <a class="menu-item" data-target="research">Research</a>
-    <a class="menu-item" data-target="publications">Publications</a>
-    <a class="menu-item" data-target="honours">Achievements</a>
+    <a class="menu-item" data-target="education">Education and Work Experience</a>
+
+    <a class="menu-item" data-target="research">Research Interests and Research Projects</a>
+    <a class="menu-item" data-target="researchshowcase">Research Showcase</a>
+   
+    <a class="menu-item" data-target="honours">Achievement
+</a>
+  
+
     <a class="menu-item" data-target="contact">Contact</a>
   </nav>
 </aside>
 
 <div class="content-area">
+
 <main>
-<section id="aboutme" class="active card">
+    <!-- Tab Contents -->
+       
+
+      
+ <section id="aboutme" class="active">
    <h2>About Me</h2>
     <p>
-        Hello! I am <strong>Soumyadip Bandyopadhyay</strong>, currently a <strong>Scientist</strong> at 
-        <strong>ABB Corporate Research Lab</strong>. My work focuses on <em>verification of PLC programs</em>, 
-        <em>validation of Generative AI outputs</em>, and <em>forward engineering using LLMs</em>. 
-        At ABB, I blend engineering excellence with innovation.
+        Hello! I am <strong>Soumyadip Bandyopadhyay</strong>, currently working as a <strong>Scientist</strong> at the 
+        <strong>ABB Corporate Research Lab</strong> since July 2023. My current research focuses on the 
+        <em>verification of PLC programs</em> during software migration and upgrades, 
+        <em>validation of Generative AI outputs</em>, and pioneering methods in 
+        <em>forward engineering using Large Language Models (LLMs)</em>. 
+        At ABB, I am proud to be part of a global innovation ecosystem that blends engineering excellence with cutting-edge research.
     </p>
+
     <p>
-        I earned my <strong>Ph.D.</strong> from <strong>IIT Kharagpur</strong>, specializing in 
-        <strong>Formal Methods</strong> and <strong>Software Engineering</strong>. My doctoral journey sparked a passion for rigorous system design and advanced development techniques.
+        I earned my <strong>Ph.D.</strong> from the prestigious 
+        <strong>Indian Institute of Technology, Kharagpur (IIT Kharagpur)</strong>, specializing in 
+        <strong>Formal Methods</strong> and <strong>Software Engineering</strong>. My doctoral studies cultivated a deep interest in rigorous system design, verification, and advanced software development techniques.
     </p>
+
     <p>
-        I was a <strong>Postdoctoral Researcher</strong> at the <strong>Hasso Plattner Institute</strong> in Germany, 
-        followed by <strong>Assistant Professor</strong> at <strong>BITS Pilani, Goa</strong>, and later, 
-        <strong>Senior Formal Verification Engineer</strong> at <strong>NVIDIA</strong>.
+        Following my Ph.D., my professional journey began as a <strong>Postdoctoral Researcher</strong> 
+        at the renowned <strong>Hasso Plattner Institute</strong> in Germany. There, I had the opportunity to deepen my research expertise, collaborate internationally, and contribute to innovative research projects in software verification and model checking.
     </p>
+
     <p>
-        I’m also passionate about <strong>world politics</strong>, <strong>folk music</strong>, and <strong>writing poetry</strong>.
+        Subsequently, I embraced academia, serving as an <strong>Assistant Professor</strong> at 
+        <strong>BITS Pilani, Goa Campus</strong> for 3.5 enriching years. During this time, I mentored students, 
+        published several research papers in reputed international conferences and journals, and contributed 
+        to the scientific community by serving as a <strong>Program Committee Member</strong> and <strong>Reviewer</strong> 
+        for various esteemed conferences and journals.
     </p>
-    <a class="action-btn" href="CVSoumyadip.pdf" target="_blank">View Resume</a>
+
+    <p>
+        With a spirit of exploration, I transitioned to industry and joined <strong>NVIDIA</strong> as a 
+        <strong>Senior Formal Verification Engineer</strong>. At NVIDIA, I worked on <strong>Data Path Verification (DPV)</strong> 
+        using state-of-the-art tools such as <strong>VC Formal</strong> and <strong>JasperGold</strong>, contributing to 
+        the development of reliable and high-performance hardware verification solutions.
+    </p>
+
+    <p>
+        Outside of my professional life, I am passionately interested in <strong>world politics</strong> and 
+        the rich traditions of <strong>folk music</strong>. I also find joy in <strong>writing poetry</strong> 
+        and performing heartfelt <strong>recitations</strong>, allowing me to creatively express my thoughts and emotions.
+    </p>
+     <li>
+      <a href="CVSoumyadip.pdf" target="_blank">My Resume</a>
+</li>
 </section>
 
-<section id="education" class="card">
-    <h2>Education</h2>
-    <ul>
-        <li>
-            <strong>Ph.D. in Computer Science and Engineering</strong><br/>
-            Indian Institute of Technology, Kharagpur (2009–2017)<br/>
-            <span>Thesis: Path Based Equivalence Checking of Petri Net Representation of Programs for Translation Validation</span> – 
-            <a href="sdipPhDThesis.pdf" target="_blank">View Thesis</a>
-        </li>
-        <li>
-            <strong>B.Tech in Computer Science and Engineering</strong><br/>
-            West Bengal University of Technology (2004–2008)
-        </li>
-    </ul>
-    <h2>Work Experience</h2>
-    <ul>
-        <li>Research Scientist, ABB Corporate Research (2023 – Present)</li>
-        <li>Senior Formal Verification Engineer, NVIDIA (2022 – 2023)</li>
-        <li>Assistant Professor, BITS Pilani Goa (2018 – 2022)</li>
-        <li>Postdoc, Hasso Plattner Institute, Germany (2017 – 2018)</li>
-    </ul>
-</section>
 
-<section id="research" class="card">
-    <h2>Research Interests</h2>
-    <div class="chip-group">
-        <span class="chip">Formal Methods</span>
-        <span class="chip">Program Equivalence</span>
-        <span class="chip">Software Verification</span>
-        <span class="chip">Generative AI</span>
-        <span class="chip">PLC Verification</span>
-        <span class="chip">Data Path Verification</span>
-        <span class="chip">High-Level Synthesis</span>
-        <span class="chip">Model-Driven Engineering</span>
+
+    
+   
+
+   <section id="education">
+        <h2>Education a</h2>
+        <p><strong>Indian Institute of Technology, Kharagpur, West Bengal, India</strong> (2009–2017)</p>
+        <ul>
+            <li>Ph.D. in Computer Science and Engineering</li>
+            <li>Formal Verification Research Group</li>
+         <li>
+    <strong>Thesis: Path Based Equivalence Checking of Petri Net Representation of Programs for Translation Validation</strong> - 
+    <a href="sdipPhDThesis.pdf" target="_blank">View Thesis</a>
+</li>
+
+ 
+        </ul>
+        <p><strong>West Bengal University of Technology, Kolkata, West Bengal, India</strong> (2004–2008)</p>
+        <ul>
+            <li>B.Tech in Computer Science and Engineering</li>
+          
+        </ul>
+
+        <h2>Work Experience</h2>
+        <ul>
+            <li>Research Scientist, ABB Corporate Research (July 2023 – Present)</li>
+            <li>Senior Formal Verification Engineer, NVIDIA (May 2022 – June 2023)</li>
+            <li>Assistant Professor, BITS Pilani K K Birla Goa Campus (Dec 2018 – May 2022)</li>
+            <li>Post-Doctoral Fellow, System Analysis and Modeling Group, Hasso Plattner Institute, Germany (Aug 2017 – Oct 2018)</li>
+            <li>Assistant Professor, BITS Pilani K K Birla Goa Campus (Dec 2016 – July 2017)</li>
+            <li>Visiting faculty, BITS Pilani K K Birla Goa Campus (Sep 2015 – Dec 2016)</li>
+        </ul>
+    </section>
+
+     <section id="research">
+        <h2>Research Interests</h2>
+        <ul>
+            <li>Formal Methods</li>
+            <li>Program Equivalence</li>
+            <li>Software Verification</li>
+            <li>Generative AI</li>
+            <li>PLC Verification</li>
+            <li>Data Path Verification</li>
+            <li>High-Level Synthesis</li>
+            <li>Model-Driven Engineering</li>
+        </ul>
+            <h2>Sponsored and Consultancy Projects</h2>
+        <ul>
+            <li>"APP based learning for Python program"  
+                <br>Funding Agency: 6th Sense and AGH advisor  
+                <br>Duration: 2021-2023  
+                <br>Amount: 15.81L
+            </li>
+            <li>"Modelling and Verification of Bio-Inspired system"  
+                <br>Funding Agency: DST under BIO-CPS incubation  
+                <br>Duration: 2020-2025  
+                <br>Amount: 40L
+            </li>
+            <li>"AES: Automated Evaluation Systems for Computer Programming Course in Any University"
+                <br>Funding Agency: BITS Pilani  
+                <br>Duration: 2018-2021  
+                <br>Project Amount: 2L
+            </li>
+            <li>“SamaTulyata: Automated Evaluation for Computer Programming Course”  
+                <br>Funding Agency: TLC BITS Goa  
+                <br>Duration: 2019-2020  
+                <br>Project Amount: 1L
+            </li>
+       
+        </ul>
+  
+
+       <h2>Industrial Projects</h2>
+        <ul>
+            <li><strong>CodeGenAI:</strong> Explore potential of Generative AI and Large Language Model (LLM) to support engineering:(<a href="https://www.etfa2024.org/" target="_blank"><strong>ETFA 2024</strong></a>) 
+                <ul class="sub-list">
+                    <li>Generation of control logic utilizing ABB control libraries and ABB notations.</li>
+                    <li>Generation of test code to improve quality and save efforts in FAT.</li>
+                    <li>Streamlined and integrated user interface to let control engineer interact with GenAI.</li>
+                </ul>
+            </li>
+            <li><strong>GenAi4SamaTulyata:</strong> Proving the the functional equivalecne for Software Migration and Software evolve:(<strong>FSE 2025 Poster Track</strong>)
+                <ul class="sub-list">
+                    <li>Building a tool for equivalence checker for software migration and software evolve.</li>
+                    <li>Model constructor carried out by LLM and verified for correctness using formal verification tools.</li>
+                    <li>Check LLM hallucination using automated reaseon method.</li> 
+                </ul>
+            </li>
+        </ul>     
+    </section>
+        <section id="researchshowcase">
+        <h2>Journal Publications</h2>
+        <ol>
+            <li><strong>Soumyadip Badyopadhyay</strong>, Dipankar Sarkar, Chittaranjan Mandal, Holger Giese, "Translation Validation of Coloured Petri Net Models of Programs on Integers", <strong>Acta Informatica</strong>, Vol. 59, Issue: 3, Pages: 725-759</li>
+            <li><strong>Soumyadip Badyopadhyay</strong>, Dipankar Sarkar, Chittaranjan Mandal, "Equivalence checking of Petri net models of programs using static and dynamic cut-points", <strong>Acta Informatica</strong>, Vol. 54, Issue: 4, Pages: 321-381</li>
+            <li><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar, Kunal Banerjee, Chittaranjan A. Mandal, Krishnam Raju, "A Path Construction Algorithm for Translation Validation using PRES+ Models", <strong>Parallel Processing Letters</strong>, Vol. 26, Issue: 2, Pages: 1-18</li>
+        </ol>
+        
+          <h2>Conference and Workshop Publications</h2>
+    <ol>
+        <li><strong>Soumyadip Bandyopadhyay</strong> and Raoul Jetley, "Pn4PLC: Verification of Software Upgrade for PLC Code", <strong>FSE 2025</strong> (Core rank <strong>A*</strong>)</li>
+        <li>Md Tauseef Alam, Sorbajit Goswami, Khushi Singh, Raju Halder, Abyayananda Maiti, <strong>Soumyadip Bandyopadhyay</strong>, "SolGen: Secure Smart Contract Code Generation Using Large Language Models Via Masked Prompting", <strong>ISEC 2025</strong></li>
+        <li>Heiko Koziolek, Virendra Ashiwal, <strong>Soumyadip Bandyopadhyay</strong>, Chandrika K R, "Automated Control Logic Test Case Generation using Large Language Models", <a href="https://www.etfa2024.org/" target="_blank"><strong>ETFA 2024</strong></a></li>
+        <li>Rakshit Mittal, Dominique Blouin, Anish Bhobe, and <strong>Soumyadip Bandyopadhyay</strong>, "Solving the Instance Model-View Update Problem in AADL", <strong>MODELS 2022</strong> (Core rank A)</li>
+        <li>Rakshit Mittal, Dominique Blouin, <strong>Soumyadip Bandyopadhyay</strong>, "PNPEq: Verification of Scheduled Conditional Behavior in Embedded Software", <strong>APSEC 2021</strong> (during publication Core rank B)</li>
+        <li>Rakshit Mittal, Rochishnu Banerjee, Dominique Blouin, <strong>Soumyadip Bandyopadhyay</strong>, "Towards an Approach for Translation Validation of Thread-level Parallelizing Transformations using Colored Petri Nets", <strong>ICSOFT 2021</strong> (Best Paper) (during publication Core rank B)</li>
+        <li>Rakshit Mittal, Rochisnu Banerjee, Santonu Sarkar, <strong>Soumyadip Bandyopadhyay</strong>, "Translation Validation of Loop involving Code Optimizing Transformations using Petri Net based Models of Programs", <strong>Petri Nets workshop 2020</strong></li>
+        <li>Shivam, Nilanjana Goswami, Veeky Baths, <strong>Soumyadip Bandyopadhyay</strong>, "AES: Automated Evaluation Systems for Computer Programming Course", <strong>ICSOFT 2019</strong> (during publication Core rank B)</li>
+        <li><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar, Chittaranjan Mandal, "SamaTulyataOne: A Path Based Equivalence Checker", <strong>ISEC 2019</strong></li>
+        <li>Santonu Sarkar, Prateek Kandelwal, <strong>Soumyadip Bandyopadhyay</strong>, Holger Giese, "Analysis of GPGPU Programs for Data-race and Barrier Divergence", <strong>ICSOFT 2018</strong> (during publication Core rank B)</li>
+        <li><strong>Soumyadip Bandyopadhyay</strong>, Santonu Sarkar, Dipankar Sarkar, and Chittaranjan Mandal, "SamaTulyata, An Efficient Path Based Equivalence Checking Tool", <strong>ATVA 2017</strong> (during publication Core rank A)</li>
+        <li><strong>Soumyadip Bandyopadhyay</strong>, Santonu Sarkar, and Kunal Banerjee, "An End-to-End Formal Verifier for Parallel Programs", <strong>ICSOFT 2017</strong> (during publication Core rank B)</li>
+        <li><strong>Soumyadip Bandyopadhyay</strong> and Kunal Banerjee, "PRESGen: A Fully Automatic Equivalence Checker for Validating Optimizing and Parallelizing Transformations", <strong>HPDC workshop 17</strong></li>
+        <li><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar, and Chittaranjan Mandal, "An efficient path based equivalence checking for Petri net based models of programs", <strong>ISEC-2016</strong></li>
+        <li><strong>Soumyadip Bandyopadhyay</strong> and Kunal Banerjee, "Implementing an Efficient Path Based Equivalence Checker for Parallel Programs", <strong>HPDC workshop 16</strong></li>
+        <li>Kunal Banerjee, <strong>Soumyadip Bandyopadhyay</strong>, and Santonu Sarkar, "Data-Race Detection: The Missing Piece for an End-to-End Semantic Equivalence Checker for Parallelizing Transformations of Array-Intensive Programs", <strong>PLDI workshop 2016</strong></li>
+        <li><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar, and Chittaranjan Mandal, "Validating SPARK: High Level Synthesis compiler", <strong>ISVLSI-2015</strong></li>
+        <li><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar, and Chittaranjan Mandal, "A Path-Based Equivalence Checking Method for Petri net based Models of Programs", <strong>ICSOFT-EA-2015</strong> (during publication Core rank B)</li>
+        <li><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar, Chittaranjan A. Mandal, "An Efficient Equivalence Checking Method for Petri net based Models of Programs", <strong>ICSE 2015</strong> (Core rank <strong>A*</strong>)</li>
+        <li><strong>Soumyadip Bandyopadhyay</strong>, Kunal Banerjee, Dipankar Sarkar, Chittaranjan A. Mandal, "Translation Validation for PRES+ Models of Parallel Behaviours via an FSMD Equivalence Checker", <strong>VDAT 2012</strong></li>
+    </ol>
+    <h2>Poster Publications</h2>
+    <ol>
+        <li><strong>Soumyadip Bandyopadhyay</strong>, "Behavioural verification using Petri net based models of programs", <strong>POPL-2015 (ACM student research competition)</strong></li>
+        <li><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar, Chittaranjan A. Mandal, "Translation Validation using Path-Based Equivalence Checking of Petri net based Models of Programs", <strong>WEPL 2015</strong></li>
+    </ol>
+
+    <h2>Book Chapters</h2>
+    <ol>
+        <li>Bedir Tekinerdogan, Rakshit Mittal, Rima Al-Ali, Mauro Iaconod, Eva Navarroe, <strong>Soumyadip Bandyopadhyay</strong>, Ken Vanherpen, and Ankica Barisic, "A feature-based ontology for cyber physical systems", <strong>Chapter 3, Book Title: Multi-Paradigm Modelling Approaches for Cyber-Physical, Elsevier Press</strong>. ISBN No. 9780128191064</li>
+        <li>Holger Giese, Dominique Blouin, Rima Al-Ali, Hana Mkaoua, <strong>Soumyadip Bandyopadhyay</strong>, Mauro Iacono, Moussa Amrani, Stefan Klikovits, and Ferhat Erata, "An ontology for multiparadigm modelling", <strong>Chapter 4, Book Title: Multi-Paradigm Modelling Approaches for Cyber-Physical, Elsevier Press</strong>. ISBN No. 9780128191064</li>
+        <li>Dominique Blouin, Rima Al-Ali, Holger Giese, Stefan Klikovits, <strong>Soumyadip Bandyopadhyay</strong>, Ankica Barisic, and Ferhat Erata, "An integrated ontology for multi-paradigm modelling for cyber-physical systems", <strong>Chapter 5, Book Title: Multi-Paradigm Modelling Approaches for Cyber-Physical, Elsevier Press</strong>. ISBN No. 9780128191064</li>
+    </ol>
+          <h2>Talk</h2>
+    <ol>
+        <li>"SamaTulyata4PLC: Behavioural Verification of Software Upgrade and Migration for PLC Code using Petri net based Model", <strong>FM Update 2024</strong></li>
+        <li>"Industrial Application of Equivalence checking of programs", <strong>RHPL 2024 (co-located with FSTTCS 2023)</strong></li>
+        <li>"Equivalence checking of Programs for Translation Validation", <strong>FM Update 2023</strong></li>
+        <li>"Implementing a Path Based Equivalence Checker for Petri net based Models of Programs", <strong>PERR 2022</strong></li>
+        <li>"Equivalence checking of Petri net based models of programs", <strong>Telecom Paris, France 2022</strong></li>
+        <li>"Translation Validation of Loop involving Code Optimizing Transformations using Petri Net based Models of Programs", <strong>FM Update 2021</strong></li>
+        <li>"Translation Validation using CPN Models of Programs", <strong>CMI 2017</strong></li>
+ 
+            <div class="links">
+        <p><a href="https://dblp.org/pid/48/8657.html" target="_blank">DBLP Profile</a></p>
+        <p><a href="https://scholar.google.co.in/citations?user=P_crwNgAAAAJ&hl=en" target="_blank">Google Scholar Profile</a></p>
     </div>
-    <h2>Sponsored & Consultancy Projects</h2>
-    <ul class="project-list">
-      <li>
-        <strong>APP based learning for Python program</strong><br>
-        <small>6th Sense & AGH advisor | 2021-2023 | ₹15.81L</small>
-      </li>
-      <li>
-        <strong>Modelling and Verification of Bio-Inspired system</strong><br>
-        <small>DST BIO-CPS | 2020-2025 | ₹40L</small>
-      </li>
-      <li>
-        <strong>AES: Automated Evaluation Systems for Programming</strong><br>
-        <small>BITS Pilani | 2018-2021 | ₹2L</small>
-      </li>
-      <li>
-        <strong>SamaTulyata: Automated Evaluation for Programming</strong><br>
-        <small>TLC BITS Goa | 2019-2020 | ₹1L</small>
-      </li>
+            <h2>Tools</h2>
+            <ul>
+        <li>
+            <a href="https://github.com/soumyadipcsis/SamaTulyata" target="_blank">SamaTulyata</a> - Petri net Based Formal equivalence checker for C Programs
+        </li>
+        <li>
+            <a href="https://github.com/soumyadipcsis/SamaTulyata4PLC" target="_blank">SamaTulyata4PLC</a> - Software Migration Verifier for PLC programs
+        </li>
+        <li>
+            <a href="https://github.com/soumyadipcsis/autoval" target="_blank">AutoVal</a> - Automated Evaluation fortware for Computer Programing course
+        </li>
+       
     </ul>
-    <h2>Industrial Projects</h2>
-    <ul class="project-list">
-      <li>
-        <strong>CodeGenAI:</strong> Generative AI for engineering (<a href="https://www.etfa2024.org/" target="_blank"><strong>ETFA 2024</strong></a>)
+     <h2>Some Video</h2>
+         <ul>
+
+    <li>
+      <a href="https://www.youtube.com/watch?v=GMYeM2SKdXQ&t=77s" target="_blank">Formal Method Update Meeting 2021</a>
+    </li>
+    
+  </ul>
+
+    </section>
+    <section id="honours">
+        <h2>Honours and Awards</h2>
         <ul>
-          <li>Control logic and ABB library integration</li>
-          <li>Test code generation for FAT</li>
-          <li>Integrated GenAI UI for engineers</li>
+             <li>Finalist Processo Automation Hackathon 2024</li>
+            <li>Best Paper, ICSOFT 2021</li>
+            <li>Selected in 7th HLF as top 50 young researcher in computer science</li>
+            <li>Post-Doctoral Fellowship, Hasso Plattner Institute, Germany, 2017</li>
+            <li>TCS Innovation Lab Research Fellowship, 2012</li>
+            <li>Czech Republic Scholarship, 2007</li>
         </ul>
-      </li>
-      <li>
-        <strong>GenAi4SamaTulyata:</strong> Equivalence checking for software migration (<strong>FSE 2025 Poster</strong>)
+       <h2>Professional Activities</h2>
         <ul>
-          <li>LLM-based model construction</li>
-          <li>Formal verification tool integration</li>
-          <li>Automated hallucination detection</li>
+            <li>Reviewer at CAV-2014, EMSOFT-2015, DAC 2020, ACM TOSEAM, Acta Informatica</li>
+            <li>PC member for ISEC 2018-2025,ICSOFT 2018–2023, VLSI D 2023, INDICON 2023, MPM4CPS 2021–2023, ModeVa 2023-2024,VDAT 2025</li>
+            <li>Senior IEEE Member, ACM Member</li>
+            <li>Co-chair, PERR 2022 (co-located with CAV 2022)</li>
         </ul>
-      </li>
-    </ul>
-</section>
+    </section>
 
-<section id="publications" class="card">
-  <h2>Journal Publications</h2>
-  <ol>
-    <li><strong>Soumyadip Badyopadhyay</strong>, Dipankar Sarkar, Chittaranjan Mandal, Holger Giese, "Translation Validation of Coloured Petri Net Models of Programs on Integers", <strong>Acta Informatica</strong>, Vol. 59, Issue: 3, Pages: 725-759</li>
-    <li><strong>Soumyadip Badyopadhyay</strong>, Dipankar Sarkar, Chittaranjan Mandal, "Equivalence checking of Petri net models of programs using static and dynamic cut-points", <strong>Acta Informatica</strong>, Vol. 54, Issue: 4, Pages: 321-381</li>
-    <li><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar, Kunal Banerjee, Chittaranjan A. Mandal, Krishnam Raju, "A Path Construction Algorithm for Translation Validation using PRES+ Models", <strong>Parallel Processing Letters</strong>, Vol. 26, Issue: 2, Pages: 1-18</li>
-  </ol>
+   
 
-  <h2>Conference and Workshop Publications</h2>
-  <ol>
-    <li><strong>Soumyadip Bandyopadhyay</strong> and Raoul Jetley, "Pn4PLC: Verification of Software Upgrade for PLC Code", <strong>FSE 2025</strong> (Core rank <strong>A*</strong>)</li>
-    <li>Md Tauseef Alam, Sorbajit Goswami, Khushi Singh, Raju Halder, Abyayananda Maiti, <strong>Soumyadip Bandyopadhyay</strong>, "SolGen: Secure Smart Contract Code Generation Using Large Language Models Via Masked Prompting", <strong>ISEC 2025</strong></li>
-    <li>Heiko Koziolek, Virendra Ashiwal, <strong>Soumyadip Bandyopadhyay</strong>, Chandrika K R, "Automated Control Logic Test Case Generation using Large Language Models", <a href="https://www.etfa2024.org/" target="_blank"><strong>ETFA 2024</strong></a></li>
-    <li>Rakshit Mittal, Dominique Blouin, Anish Bhobe, and <strong>Soumyadip Bandyopadhyay</strong>, "Solving the Instance Model-View Update Problem in AADL", <strong>MODELS 2022</strong> (Core rank A)</li>
-    <li>Rakshit Mittal, Dominique Blouin, <strong>Soumyadip Bandyopadhyay</strong>, "PNPEq: Verification of Scheduled Conditional Behavior in Embedded Software", <strong>APSEC 2021</strong> (during publication Core rank B)</li>
-    <li>Rakshit Mittal, Rochishnu Banerjee, Dominique Blouin, <strong>Soumyadip Bandyopadhyay</strong>, "Towards an Approach for Translation Validation of Thread-level Parallelizing Transformations using Colored Petri Nets", <strong>ICSOFT 2021</strong> (Best Paper) (during publication Core rank B)</li>
-    <li>Rakshit Mittal, Rochisnu Banerjee, Santonu Sarkar, <strong>Soumyadip Bandyopadhyay</strong>, "Translation Validation of Loop involving Code Optimizing Transformations using Petri Net based Models of Programs", <strong>Petri Nets workshop 2020</strong></li>
-    <li>Shivam, Nilanjana Goswami, Veeky Baths, <strong>Soumyadip Bandyopadhyay</strong>, "AES: Automated Evaluation Systems for Computer Programming Course", <strong>ICSOFT 2019</strong> (during publication Core rank B)</li>
-    <li><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar, Chittaranjan Mandal, "SamaTulyataOne: A Path Based Equivalence Checker", <strong>ISEC 2019</strong></li>
-    <li>Santonu Sarkar, Prateek Kandelwal, <strong>Soumyadip Bandyopadhyay</strong>, Holger Giese, "Analysis of GPGPU Programs for Data-race and Barrier Divergence", <strong>ICSOFT 2018</strong> (during publication Core rank B)</li>
-    <li><strong>Soumyadip Bandyopadhyay</strong>, Santonu Sarkar, Dipankar Sarkar, and Chittaranjan Mandal, "SamaTulyata, An Efficient Path Based Equivalence Checking Tool", <strong>ATVA 2017</strong> (during publication Core rank A)</li>
-    <li><strong>Soumyadip Bandyopadhyay</strong>, Santonu Sarkar, and Kunal Banerjee, "An End-to-End Formal Verifier for Parallel Programs", <strong>ICSOFT 2017</strong> (during publication Core rank B)</li>
-    <li><strong>Soumyadip Bandyopadhyay</strong> and Kunal Banerjee, "PRESGen: A Fully Automatic Equivalence Checker for Validating Optimizing and Parallelizing Transformations", <strong>HPDC workshop 17</strong></li>
-    <li><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar, and Chittaranjan Mandal, "An efficient path based equivalence checking for Petri net based models of programs", <strong>ISEC-2016</strong></li>
-    <li><strong>Soumyadip Bandyopadhyay</strong> and Kunal Banerjee, "Implementing an Efficient Path Based Equivalence Checker for Parallel Programs", <strong>HPDC workshop 16</strong></li>
-    <li>Kunal Banerjee, <strong>Soumyadip Bandyopadhyay</strong>, and Santonu Sarkar, "Data-Race Detection: The Missing Piece for an End-to-End Semantic Equivalence Checker for Parallelizing Transformations of Array-Intensive Programs", <strong>PLDI workshop 2016</strong></li>
-    <li><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar, and Chittaranjan Mandal, "Validating SPARK: High Level Synthesis compiler", <strong>ISVLSI-2015</strong></li>
-    <li><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar, and Chittaranjan Mandal, "A Path-Based Equivalence Checking Method for Petri net based Models of Programs", <strong>ICSOFT-EA-2015</strong> (during publication Core rank B)</li>
-    <li><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar, Chittaranjan A. Mandal, "An Efficient Equivalence Checking Method for Petri net based Models of Programs", <strong>ICSE 2015</strong> (Core rank <strong>A*</strong>)</li>
-    <li><strong>Soumyadip Bandyopadhyay</strong>, Kunal Banerjee, Dipankar Sarkar, Chittaranjan A. Mandal, "Translation Validation for PRES+ Models of Parallel Behaviours via an FSMD Equivalence Checker", <strong>VDAT 2012</strong></li>
-  </ol>
 
-  <h2>Poster Publications</h2>
-  <ol>
-    <li><strong>Soumyadip Bandyopadhyay</strong>, "Behavioural verification using Petri net based models of programs", <strong>POPL-2015 (ACM student research competition)</strong></li>
-    <li><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar, Chittaranjan A. Mandal, "Translation Validation using Path-Based Equivalence Checking of Petri net based Models of Programs", <strong>WEPL 2015</strong></li>
-  </ol>
+  
+   <!-- Tab Contents -->
 
-  <h2>Book Chapters</h2>
-  <ol>
-    <li>Bedir Tekinerdogan, Rakshit Mittal, Rima Al-Ali, Mauro Iaconod, Eva Navarroe, <strong>Soumyadip Bandyopadhyay</strong>, Ken Vanherpen, and Ankica Barisic, "A feature-based ontology for cyber physical systems", <strong>Chapter 3, Book Title: Multi-Paradigm Modelling Approaches for Cyber-Physical, Elsevier Press</strong>. ISBN No. 9780128191064</li>
-    <li>Holger Giese, Dominique Blouin, Rima Al-Ali, Hana Mkaoua, <strong>Soumyadip Bandyopadhyay</strong>, Mauro Iacono, Moussa Amrani, Stefan Klikovits, and Ferhat Erata, "An ontology for multiparadigm modelling", <strong>Chapter 4, Book Title: Multi-Paradigm Modelling Approaches for Cyber-Physical, Elsevier Press</strong>. ISBN No. 9780128191064</li>
-    <li>Dominique Blouin, Rima Al-Ali, Holger Giese, Stefan Klikovits, <strong>Soumyadip Bandyopadhyay</strong>, Ankica Barisic, and Ferhat Erata, "An integrated ontology for multi-paradigm modelling for cyber-physical systems", <strong>Chapter 5, Book Title: Multi-Paradigm Modelling Approaches for Cyber-Physical, Elsevier Press</strong>. ISBN No. 9780128191064</li>
-  </ol>
-</section>
+ <!-- Tab Content -->
 
-<section id="honours" class="card">
-    <h2>Honours and Awards</h2>
-    <ul class="award-list">
-        <li>Finalist Processo Automation Hackathon 2024</li>
-        <li>Best Paper, ICSOFT 2021</li>
-        <li>Selected in 7th HLF as top 50 young researcher in computer science</li>
-        <li>Post-Doctoral Fellowship, Hasso Plattner Institute, Germany, 2017</li>
-        <li>TCS Innovation Lab Research Fellowship, 2012</li>
-        <li>Czech Republic Scholarship, 2007</li>
-    </ul>
-    <h2>Professional Activities</h2>
-    <ul class="award-list">
-        <li>Reviewer: CAV-2014, EMSOFT-2015, DAC 2020, ACM TOSEAM, Acta Informatica</li>
-        <li>PC member: ISEC 2018-2025, ICSOFT 2018–2023, VLSI D 2023, INDICON 2023, MPM4CPS 2021–2023, ModeVa 2023-2024, VDAT 2025</li>
-        <li>Senior IEEE Member, ACM Member</li>
-        <li>Co-chair, PERR 2022 (co-located with CAV 2022)</li>
-    </ul>
-</section>
 
-<section id="contact" class="card">
-    <h2>Contact Information</h2>
-    <ul class="contact-list">
-        <li><strong>Scientist</strong>, ABB Corporate Research</li>
-        <li>Mobile: +91 8900270263</li>
-        <li>Official Email: <a href="mailto:soumyadip.bandyopadhyay@in.abb.com">soumyadip.bandyopadhyay@in.abb.com</a></li>
-        <li>Personal Email: <a href="mailto:soumyadipcse@gmail.com">soumyadipcse@gmail.com</a></li>
-        <li>Country: India</li>
-    </ul>
-</section>
-</main>
-<footer>
-    <p>© 2025 Dr. Soumyadip Bandyopadhyay. All Rights Reserved.</p>
-</footer>
-</div>
-<script>
+     <section id="contact">
+        <h2>Contact Information</h2>
+        <p><strong>Scientist</strong></p>
+        <p>Mobile: +91 8900270263</p>
+        <p>ABB Corporate Research<br>
+        Official Email: <a href="mailto:soumyadip.bandyopadhyay@in.abb.com">soumyadip.bandyopadhyay@in.abb.com</a></p>
+        <p>Country: India<br>
+        Personal Email: <a href="mailto:soumyadipcse@gmail.com">soumyadipcse@gmail.com</a></p>
+    </section>
+      </main>
+    <footer>
+        <p>© 2025 Dr. Soumyadip Bandyopadhyay. All Rights Reserved.</p>
+    </footer>
+  </div>
+  <script>
   const menuItems = document.querySelectorAll('.menu-item');
   const sections = document.querySelectorAll('main section');
 
   menuItems.forEach(item => {
     item.addEventListener('click', () => {
+      // Remove 'active' class from all menu items
       menuItems.forEach(i => i.classList.remove('active'));
       item.classList.add('active');
+
+      // Hide all sections
       sections.forEach(section => section.classList.remove('active'));
+
+      // Show target section
       const targetId = item.getAttribute('data-target');
       const targetSection = document.getElementById(targetId);
       if (targetSection) {

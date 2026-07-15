@@ -1,910 +1,754 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dr. Soumyadip Bandyopadhyay</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    :root {
-      --primary: #1a3a5c;
-      --primary-light: #2563a8;
-      --accent: #e63946;
-      --accent2: #f4a261;
-      --sidebar-bg: linear-gradient(180deg, #0f2744 0%, #1a3a5c 40%, #1e4d8c 100%);
-      --bg: #f0f4f8;
-      --card-bg: #ffffff;
-      --text: #1e293b;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-      --tag-bg: #dbeafe;
-      --tag-text: #1e40af;
-      --success: #10b981;
-      --gold: #f59e0b;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html, body {
-      height: 100%;
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
-
-    body { display: flex; flex-direction: row; height: 100vh; overflow: hidden; }
-
-    /* ===== SIDEBAR ===== */
-    aside {
-      width: 270px;
-      background: var(--sidebar-bg);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 30px 0 20px;
-      height: 100vh;
-      overflow-y: auto;
-      position: fixed;
-      z-index: 10;
-      box-shadow: 4px 0 20px rgba(0,0,0,0.2);
-    }
-
-    .profile-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 0 20px 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
       width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
     }
 
-    .profile-img-wrap {
-      width: 110px;
-      height: 110px;
+    :root {
+      --sidebar-w: 260px;
+      --topbar-h: 56px;
+      --primary: #0f2744;
+      --primary-light: #1e56a0;
+      --accent: #e63946;
+      --accent2: #f4a261;
+      --bg: #f0f4f8;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --gold: #f59e0b;
+      --tag-bg: #dbeafe;
+      --tag-txt: #1e40af;
+    }
+
+    /* ── LAYOUT SHELL ── */
+    #app {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      grid-template-rows: var(--topbar-h) 1fr auto;
+      grid-template-areas:
+        "sidebar topbar"
+        "sidebar main"
+        "sidebar footer";
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* ── SIDEBAR ── */
+    #sidebar {
+      grid-area: sidebar;
+      background: linear-gradient(180deg,#061a30 0%,#0f2744 45%,#1a3d6b 100%);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    #sidebar::-webkit-scrollbar { width: 4px; }
+    #sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.2); border-radius: 2px; }
+
+    .profile-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 28px 16px 20px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .avatar-ring {
+      width: 96px; height: 96px;
       border-radius: 50%;
       padding: 3px;
       background: linear-gradient(135deg, #f4a261, #e63946);
-      margin-bottom: 14px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      margin-bottom: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.4);
     }
 
-    aside img {
-      width: 100%;
-      height: 100%;
+    .avatar-ring img {
+      width: 100%; height: 100%;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid #0f2744;
+      border: 3px solid #061a30;
+      display: block;
     }
 
-    .profile-name {
+    .pname {
       font-family: 'Poppins', sans-serif;
-      font-size: 1rem;
+      font-size: .92rem;
       font-weight: 700;
       text-align: center;
       line-height: 1.3;
       color: #fff;
-      margin-bottom: 4px;
     }
 
-    .profile-title {
-      font-size: 0.72rem;
+    .ptitle {
+      font-size: .68rem;
       color: #93c5fd;
+      margin-top: 3px;
       text-align: center;
-      font-weight: 400;
-      letter-spacing: 0.5px;
     }
 
-    .profile-org {
-      font-size: 0.7rem;
+    .porg {
+      font-size: .68rem;
       color: #f4a261;
+      font-weight: 600;
+      margin-top: 3px;
       text-align: center;
-      margin-top: 4px;
-      font-weight: 500;
     }
 
-    nav { width: 100%; padding: 12px 0; flex: 1; }
+    nav { flex: 1; padding: 10px 0; }
 
     nav a {
       display: flex;
       align-items: center;
       gap: 10px;
-      color: rgba(255,255,255,0.75);
-      text-decoration: none;
-      padding: 13px 22px;
-      font-size: 0.82rem;
+      padding: 12px 20px;
+      font-size: .8rem;
       font-weight: 500;
-      transition: all 0.25s ease;
+      color: rgba(255,255,255,.7);
+      text-decoration: none;
       cursor: pointer;
       border-left: 3px solid transparent;
-      position: relative;
+      transition: all .2s;
+      white-space: nowrap;
     }
 
-    nav a i { width: 18px; font-size: 0.85rem; opacity: 0.8; }
+    nav a i { width: 16px; font-size: .8rem; }
 
-    nav a:hover {
-      color: #fff;
-      background: rgba(255,255,255,0.08);
-      border-left-color: #f4a261;
+    nav a:hover { color: #fff; background: rgba(255,255,255,.07); border-left-color: #f4a261; }
+    nav a.active { color: #fff; background: rgba(255,255,255,.12); border-left-color: #e63946; font-weight: 600; }
+    nav a.active i { color: #f4a261; }
+
+    .sidebar-social {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 16px 18px;
+      border-top: 1px solid rgba(255,255,255,.1);
     }
-
-    nav a.active {
-      color: #fff;
-      background: rgba(255,255,255,0.12);
-      border-left-color: #e63946;
-      font-weight: 600;
-    }
-
-    nav a.active i { opacity: 1; color: #f4a261; }
-
-    .sidebar-footer {
-      padding: 16px 20px 10px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      width: 100%;
-      text-align: center;
-    }
-
-    .sidebar-social { display: flex; justify-content: center; gap: 12px; margin-top: 8px; }
 
     .sidebar-social a {
-      width: 32px; height: 32px;
+      width: 30px; height: 30px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,.1);
       display: flex; align-items: center; justify-content: center;
-      color: rgba(255,255,255,0.7);
+      color: rgba(255,255,255,.7);
       text-decoration: none;
-      font-size: 0.8rem;
-      transition: all 0.2s;
+      font-size: .75rem;
+      transition: all .2s;
     }
 
-    .sidebar-social a:hover { background: var(--accent2); color: #fff; transform: translateY(-2px); }
+    .sidebar-social a:hover { background: #f4a261; color: #fff; }
 
-    /* ===== CONTENT AREA ===== */
-    .content-area {
-      margin-left: 270px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    /* ===== TOP BAR ===== */
-    .topbar {
-      background: white;
+    /* ── TOPBAR ── */
+    #topbar {
+      grid-area: topbar;
+      background: #fff;
       border-bottom: 1px solid var(--border);
-      padding: 0 28px;
       display: flex;
       align-items: center;
-      height: 58px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
-      flex-shrink: 0;
+      padding: 0 28px;
+      box-shadow: 0 1px 5px rgba(0,0,0,.06);
     }
 
-    .topbar-title {
+    #topbar .tb-title {
       font-family: 'Poppins', sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
+      font-size: .95rem;
+      font-weight: 700;
       color: var(--primary);
     }
 
-    .topbar-sub { font-size: 0.75rem; color: var(--text-muted); margin-left: 10px; }
+    #topbar .tb-sub { font-size: .72rem; color: var(--muted); margin-left: 8px; }
 
-    .topbar-badge {
+    #topbar .tb-badge {
       margin-left: auto;
       background: #dbeafe;
       color: #1e40af;
-      font-size: 0.7rem;
-      padding: 4px 10px;
+      font-size: .68rem;
+      font-weight: 700;
+      padding: 4px 12px;
       border-radius: 20px;
-      font-weight: 600;
     }
 
-    main {
-      flex: 1;
+    /* ── MAIN ── */
+    #main {
+      grid-area: main;
       overflow-y: auto;
-      padding: 28px;
+      overflow-x: hidden;
       background: var(--bg);
+      padding: 24px 28px;
+      width: 100%;
     }
 
-    /* ===== SECTIONS ===== */
-    section { display: none; animation: fadeIn 0.3s ease; }
-    section.active { display: block; }
+    #main::-webkit-scrollbar { width: 6px; }
+    #main::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+    /* ── FOOTER ── */
+    #footer {
+      grid-area: footer;
+      background: #fff;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: .72rem;
+      color: var(--muted);
+      padding: 10px;
+    }
+
+    /* ── SECTIONS ── */
+    section { display: none; width: 100%; }
+    section.active { display: block; animation: fadeIn .3s ease; }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity:0; transform:translateY(6px); }
+      to   { opacity:1; transform:translateY(0); }
     }
 
-    /* ===== SECTION HEADER ===== */
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
-      padding-bottom: 14px;
-      border-bottom: 2px solid var(--border);
-    }
-
-    .section-header-icon {
-      width: 38px; height: 38px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--primary-light), var(--primary));
-      display: flex; align-items: center; justify-content: center;
-      color: white;
-      font-size: 0.95rem;
-      flex-shrink: 0;
-    }
-
-    .section-header h2 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin: 0;
-    }
-
-    /* ===== CARD ===== */
+    /* ── CARD ── */
     .card {
-      background: var(--card-bg);
+      background: var(--card);
       border-radius: 14px;
-      padding: 24px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      margin-bottom: 20px;
+      padding: 22px 24px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.06);
       border: 1px solid var(--border);
+      margin-bottom: 20px;
+      width: 100%;
     }
 
     .card-title {
       font-family: 'Poppins', sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
+      font-size: .9rem;
+      font-weight: 700;
       color: var(--primary);
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       display: flex;
       align-items: center;
       gap: 8px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
     }
 
-    .card-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    /* ===== ABOUT ME ===== */
-    .about-hero {
-      background: linear-gradient(135deg, #0f2744 0%, #1e4d8c 100%);
-      border-radius: 16px;
-      padding: 28px;
-      color: white;
-      margin-bottom: 20px;
+    /* ── SECTION HEADER ── */
+    .sh {
       display: flex;
-      gap: 22px;
       align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
     }
 
-    .about-hero-img {
-      width: 90px; height: 90px;
+    .sh-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg,var(--primary-light),var(--primary));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-size: .85rem;
+    }
+
+    .sh h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* ── ABOUT HERO ── */
+    .hero {
+      background: linear-gradient(135deg,#061a30 0%,#1a3d6b 100%);
+      border-radius: 14px;
+      padding: 26px;
+      color: #fff;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    .hero img {
+      width: 82px; height: 82px;
       border-radius: 50%;
-      border: 3px solid rgba(255,255,255,0.3);
+      border: 3px solid rgba(255,255,255,.3);
       object-fit: cover;
       flex-shrink: 0;
     }
 
-    .about-hero-text h2 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-      color: #fff;
-    }
+    .hero h2 { font-family:'Poppins',sans-serif; font-size:1.1rem; font-weight:700; margin-bottom:4px; }
+    .hero p { font-size:.78rem; color:rgba(255,255,255,.75); line-height:1.6; margin:0; }
 
-    .about-hero-text p { font-size: 0.82rem; color: rgba(255,255,255,0.75); line-height: 1.6; margin: 0; }
-
-    .about-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-
+    .chips { display:flex; flex-wrap:wrap; gap:7px; margin-top:10px; }
     .chip {
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.25);
-      color: white;
-      font-size: 0.7rem;
-      padding: 3px 10px;
-      border-radius: 20px;
-      font-weight: 500;
+      background:rgba(255,255,255,.15);
+      border:1px solid rgba(255,255,255,.25);
+      color:#fff;
+      font-size:.67rem;
+      padding:3px 10px;
+      border-radius:20px;
+      font-weight:500;
     }
 
-    .about-body p {
-      font-size: 0.875rem;
-      line-height: 1.75;
-      color: var(--text);
-      margin-bottom: 14px;
-    }
+    .about-body p { font-size:.85rem; line-height:1.75; color:var(--text); margin-bottom:13px; }
 
-    /* ===== CONTACT CARD ===== */
+    /* ── CONTACT GRID ── */
     .contact-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 14px;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 12px;
-      padding: 14px 16px;
-      background: var(--bg);
-      border-radius: 10px;
-      border: 1px solid var(--border);
     }
 
-    .contact-icon {
-      width: 36px; height: 36px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, var(--primary-light), var(--primary));
-      color: white;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.85rem;
-      flex-shrink: 0;
+    .ci {
+      display:flex; align-items:center; gap:12px;
+      padding:13px 15px;
+      background:var(--bg);
+      border-radius:10px;
+      border:1px solid var(--border);
     }
 
-    .contact-label { font-size: 0.68rem; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
-    .contact-value { font-size: 0.82rem; font-weight: 600; color: var(--text); }
-    .contact-value a { color: var(--primary-light); text-decoration: none; }
-    .contact-value a:hover { text-decoration: underline; }
+    .ci-icon {
+      width:34px; height:34px;
+      border-radius:8px;
+      background:linear-gradient(135deg,var(--primary-light),var(--primary));
+      color:#fff;
+      display:flex; align-items:center; justify-content:center;
+      font-size:.8rem; flex-shrink:0;
+    }
+
+    .ci-lbl { font-size:.63rem; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.5px; }
+    .ci-val { font-size:.8rem; font-weight:600; color:var(--text); }
+    .ci-val a { color:var(--primary-light); text-decoration:none; }
+    .ci-val a:hover { text-decoration:underline; }
 
     .resume-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: linear-gradient(135deg, var(--accent), #c1121f);
-      color: white;
-      padding: 10px 22px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 0.82rem;
-      font-weight: 600;
-      margin-top: 16px;
-      transition: all 0.2s;
-      box-shadow: 0 4px 12px rgba(230,57,70,0.3);
+      display:inline-flex; align-items:center; gap:8px;
+      background:linear-gradient(135deg,#e63946,#c1121f);
+      color:#fff;
+      padding:9px 20px;
+      border-radius:8px;
+      text-decoration:none;
+      font-size:.8rem; font-weight:600;
+      margin-top:16px;
+      box-shadow:0 4px 12px rgba(230,57,70,.3);
+      transition:all .2s;
     }
 
-    .resume-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(230,57,70,0.4); }
+    .resume-btn:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(230,57,70,.4); }
 
-    /* ===== TIMELINE ===== */
-    .timeline { position: relative; padding-left: 28px; }
-
+    /* ── TIMELINE ── */
+    .timeline { position:relative; padding-left:26px; }
     .timeline::before {
-      content: '';
-      position: absolute;
-      left: 8px; top: 0; bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--primary-light), var(--border));
+      content:''; position:absolute;
+      left:7px; top:0; bottom:0;
+      width:2px;
+      background:linear-gradient(to bottom,var(--primary-light),var(--border));
     }
 
-    .timeline-item {
-      position: relative;
-      margin-bottom: 22px;
-      padding: 16px 18px;
-      background: var(--card-bg);
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+    .ti {
+      position:relative;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:14px 16px;
+      margin-bottom:14px;
+      box-shadow:0 1px 4px rgba(0,0,0,.04);
     }
 
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -24px; top: 18px;
-      width: 12px; height: 12px;
-      border-radius: 50%;
-      background: var(--primary-light);
-      border: 2px solid white;
-      box-shadow: 0 0 0 2px var(--primary-light);
+    .ti::before {
+      content:''; position:absolute;
+      left:-22px; top:16px;
+      width:11px; height:11px;
+      border-radius:50%;
+      background:var(--primary-light);
+      border:2px solid #fff;
+      box-shadow:0 0 0 2px var(--primary-light);
     }
 
-    .timeline-item.current::before { background: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
-
-    .timeline-org {
-      font-weight: 700;
-      font-size: 0.9rem;
-      color: var(--primary);
-      margin-bottom: 2px;
+    .ti.cur::before { background:var(--accent); box-shadow:0 0 0 2px var(--accent); }
+    .ti-org { font-weight:700; font-size:.85rem; color:var(--primary); }
+    .ti-role { font-size:.77rem; color:var(--muted); margin:2px 0 5px; }
+    .ti-period {
+      display:inline-flex; align-items:center; gap:4px;
+      font-size:.67rem; font-weight:700;
+      background:var(--tag-bg); color:var(--tag-txt);
+      padding:2px 8px; border-radius:20px;
     }
 
-    .timeline-role {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-
-    .timeline-period {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.7rem;
-      background: var(--tag-bg);
-      color: var(--tag-text);
-      padding: 2px 8px;
-      border-radius: 20px;
-      font-weight: 600;
-    }
-
+    /* ── EDU CARD ── */
     .edu-card {
-      background: white;
-      border-radius: 12px;
-      padding: 18px 20px;
-      border: 1px solid var(--border);
-      margin-bottom: 14px;
-      border-left: 4px solid var(--primary-light);
+      background:#fff;
+      border-radius:10px;
+      padding:16px 18px;
+      border:1px solid var(--border);
+      border-left:4px solid var(--primary-light);
+      margin-bottom:12px;
     }
 
-    .edu-card h4 {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 4px;
+    .edu-badge {
+      display:inline-block;
+      background:#f0fdf4; color:#166534;
+      font-size:.65rem; font-weight:700;
+      padding:2px 8px; border-radius:20px;
+      margin-bottom:5px;
     }
 
-    .edu-card p { font-size: 0.8rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
+    .edu-card h4 { font-size:.88rem; font-weight:700; color:var(--primary); margin-bottom:3px; }
+    .edu-card p { font-size:.78rem; color:var(--muted); margin:0; line-height:1.5; }
 
-    .edu-card .edu-badge {
-      display: inline-block;
-      background: #f0fdf4;
-      color: #166534;
-      font-size: 0.68rem;
-      font-weight: 600;
-      padding: 2px 8px;
-      border-radius: 20px;
-      margin-bottom: 6px;
-    }
-
-    /* ===== RESEARCH TAGS ===== */
-    .tags-wrap { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+    /* ── TAGS ── */
+    .tags { display:flex; flex-wrap:wrap; gap:9px; }
 
     .tag {
-      background: var(--tag-bg);
-      color: var(--tag-text);
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 20px;
-      border: 1px solid #bfdbfe;
-      transition: all 0.2s;
+      background:var(--tag-bg); color:var(--tag-txt);
+      font-size:.76rem; font-weight:600;
+      padding:6px 14px; border-radius:20px;
+      border:1px solid #bfdbfe;
+      transition:all .2s; cursor:default;
     }
 
-    .tag:hover { background: var(--primary-light); color: white; transform: translateY(-2px); cursor: default; }
+    .tag:hover { background:var(--primary-light); color:#fff; transform:translateY(-2px); }
 
-    /* ===== PROJECT CARDS ===== */
-    .project-card {
-      background: white;
-      border-radius: 12px;
-      padding: 18px 20px;
-      border: 1px solid var(--border);
-      margin-bottom: 14px;
-      transition: box-shadow 0.2s;
+    /* ── PROJECT CARD ── */
+    .proj {
+      background:#fff;
+      border-radius:10px;
+      padding:16px 18px;
+      border:1px solid var(--border);
+      margin-bottom:12px;
+      transition:box-shadow .2s;
     }
 
-    .project-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+    .proj:hover { box-shadow:0 4px 14px rgba(0,0,0,.09); }
+    .proj h4 { font-size:.85rem; font-weight:700; color:var(--primary); margin-bottom:7px; display:flex; align-items:center; gap:7px; }
 
-    .project-card h4 {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .pmeta { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:8px; }
+
+    .badge {
+      font-size:.65rem; font-weight:700;
+      padding:2px 8px; border-radius:20px;
     }
 
-    .project-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+    .b-blue   { background:#dbeafe; color:#1e40af; }
+    .b-green  { background:#d1fae5; color:#065f46; }
+    .b-orange { background:#ffedd5; color:#9a3412; }
+    .b-purple { background:#ede9fe; color:#5b21b6; }
 
-    .project-badge {
-      font-size: 0.68rem;
-      font-weight: 600;
-      padding: 2px 8px;
-      border-radius: 20px;
+    .proj ul { padding-left:16px; }
+    .proj ul li { font-size:.78rem; color:var(--muted); line-height:1.65; }
+
+    /* ── PUBLICATIONS ── */
+    .pub {
+      background:#fff;
+      border-radius:9px;
+      padding:12px 15px;
+      margin-bottom:9px;
+      border:1px solid var(--border);
+      border-left:3px solid var(--primary-light);
+      font-size:.8rem;
+      line-height:1.65;
+      color:var(--text);
+      transition:box-shadow .2s;
     }
 
-    .badge-blue { background: #dbeafe; color: #1e40af; }
-    .badge-green { background: #d1fae5; color: #065f46; }
-    .badge-orange { background: #ffedd5; color: #9a3412; }
-    .badge-purple { background: #ede9fe; color: #5b21b6; }
+    .pub:hover { box-shadow:0 3px 10px rgba(0,0,0,.08); }
 
-    .project-card ul { margin: 0; padding-left: 18px; }
-    .project-card ul li { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; }
-
-    /* ===== PUBLICATIONS ===== */
-    .pub-item {
-      background: white;
-      border-radius: 10px;
-      padding: 14px 16px;
-      margin-bottom: 10px;
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--primary-light);
-      font-size: 0.82rem;
-      line-height: 1.65;
-      color: var(--text);
-      transition: box-shadow 0.2s;
+    .pnum {
+      display:inline-flex; align-items:center; justify-content:center;
+      width:20px; height:20px;
+      background:var(--primary);
+      color:#fff; font-size:.62rem; font-weight:700;
+      border-radius:50%; margin-right:7px;
+      vertical-align:middle;
+      flex-shrink:0;
     }
 
-    .pub-item:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.08); }
-
-    .pub-item strong { color: var(--primary); }
-
-    .pub-venue {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 4px;
-      margin-left: 4px;
-      vertical-align: middle;
+    .vbadge {
+      display:inline-block;
+      font-size:.65rem; font-weight:700;
+      padding:1px 6px; border-radius:4px;
+      margin-left:4px; vertical-align:middle;
     }
 
-    .venue-a-star { background: #fef3c7; color: #92400e; }
-    .venue-a { background: #dbeafe; color: #1e40af; }
-    .venue-b { background: #f0fdf4; color: #166534; }
-    .venue-default { background: #f1f5f9; color: #475569; }
+    .v-astar { background:#fef3c7; color:#92400e; }
+    .v-a     { background:#dbeafe; color:#1e40af; }
+    .v-b     { background:#f0fdf4; color:#166534; }
 
-    .pub-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 22px; height: 22px;
-      border-radius: 50%;
-      background: var(--primary);
-      color: white;
-      font-size: 0.65rem;
-      font-weight: 700;
-      margin-right: 8px;
-      flex-shrink: 0;
-      vertical-align: middle;
+    .pub-sec {
+      font-family:'Poppins',sans-serif;
+      font-size:.88rem; font-weight:700;
+      color:var(--primary);
+      margin:20px 0 10px;
+      display:flex; align-items:center; gap:8px;
     }
 
-    .pub-section-label {
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin: 20px 0 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .cnt { background:var(--primary); color:#fff; font-size:.63rem; padding:2px 7px; border-radius:20px; }
+
+    .scholar-links { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+
+    .sch-btn {
+      display:inline-flex; align-items:center; gap:7px;
+      padding:8px 16px;
+      border-radius:7px;
+      font-size:.77rem; font-weight:600;
+      text-decoration:none;
+      transition:all .2s;
     }
 
-    .pub-section-label .count-badge {
-      background: var(--primary);
-      color: white;
-      font-size: 0.68rem;
-      padding: 2px 8px;
-      border-radius: 20px;
+    .btn-dblp    { background:#dbeafe; color:#1e40af; border:1px solid #bfdbfe; }
+    .btn-scholar { background:#fef3c7; color:#92400e; border:1px solid #fde68a; }
+    .btn-dblp:hover    { background:#1e40af; color:#fff; }
+    .btn-scholar:hover { background:#92400e; color:#fff; }
+
+    /* ── TALK ITEM ── */
+    .talk {
+      display:flex; gap:12px; align-items:flex-start;
+      background:#fff;
+      border-radius:9px;
+      padding:13px 15px;
+      border:1px solid var(--border);
+      margin-bottom:9px;
+      transition:box-shadow .2s;
     }
 
-    .scholar-links { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+    .talk:hover { box-shadow:0 3px 10px rgba(0,0,0,.08); }
 
-    .scholar-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 18px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s;
+    .tnum {
+      width:26px; height:26px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--primary-light),var(--primary));
+      color:#fff; font-size:.67rem; font-weight:700;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0; margin-top:1px;
     }
 
-    .btn-dblp { background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
-    .btn-scholar { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
-    .btn-dblp:hover { background: #1e40af; color: white; }
-    .btn-scholar:hover { background: #92400e; color: white; }
+    .ttxt { font-size:.8rem; line-height:1.6; color:var(--text); }
+    .ttxt strong { color:var(--primary); }
 
-    /* ===== TALKS ===== */
-    .talk-item {
-      display: flex;
-      gap: 14px;
-      padding: 14px 16px;
-      background: white;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      margin-bottom: 10px;
-      align-items: flex-start;
-      transition: box-shadow 0.2s;
+    /* ── TOOL CARD ── */
+    .tool {
+      display:flex; align-items:center; gap:14px;
+      background:#fff;
+      border-radius:10px;
+      padding:15px 18px;
+      border:1px solid var(--border);
+      margin-bottom:11px;
+      transition:box-shadow .2s, transform .2s;
     }
 
-    .talk-item:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.08); }
+    .tool:hover { box-shadow:0 4px 14px rgba(0,0,0,.09); transform:translateY(-2px); }
 
-    .talk-num {
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary-light), var(--primary));
-      color: white;
-      font-size: 0.7rem;
-      font-weight: 700;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      margin-top: 1px;
+    .tool-ic {
+      width:42px; height:42px;
+      border-radius:9px;
+      background:linear-gradient(135deg,var(--primary-light),var(--primary));
+      color:#fff; font-size:1rem;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0;
     }
 
-    .talk-text { font-size: 0.82rem; line-height: 1.6; color: var(--text); }
-    .talk-text strong { color: var(--primary); }
+    .tool-name { font-weight:700; font-size:.87rem; color:var(--primary); text-decoration:none; }
+    .tool-name:hover { text-decoration:underline; }
+    .tool-desc { font-size:.75rem; color:var(--muted); margin-top:2px; }
 
-    /* ===== TOOLS ===== */
-    .tool-card {
-      background: white;
-      border-radius: 12px;
-      padding: 18px 20px;
-      border: 1px solid var(--border);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      transition: box-shadow 0.2s, transform 0.2s;
+    .gh-btn {
+      margin-left:auto;
+      display:flex; align-items:center; gap:5px;
+      font-size:.7rem; color:var(--muted);
+      background:var(--bg); padding:4px 10px;
+      border-radius:6px; text-decoration:none;
+      border:1px solid var(--border); flex-shrink:0;
+      transition:all .2s;
     }
 
-    .tool-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    .gh-btn:hover { background:#0f2744; color:#fff; }
 
-    .tool-icon {
-      width: 44px; height: 44px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #1e4d8c, #0f2744);
-      display: flex; align-items: center; justify-content: center;
-      color: white;
-      font-size: 1.1rem;
-      flex-shrink: 0;
+    /* ── VIDEO ── */
+    .vcard {
+      display:flex; align-items:center;
+      background:#fff;
+      border-radius:10px;
+      overflow:hidden;
+      border:1px solid var(--border);
+      margin-bottom:11px;
+      text-decoration:none;
+      transition:box-shadow .2s;
     }
 
-    .tool-name {
-      font-weight: 700;
-      font-size: 0.9rem;
-      color: var(--primary);
-      text-decoration: none;
+    .vcard:hover { box-shadow:0 4px 14px rgba(0,0,0,.09); }
+
+    .vthumb {
+      width:76px; height:56px;
+      background:linear-gradient(135deg,#e63946,#c1121f);
+      display:flex; align-items:center; justify-content:center;
+      color:#fff; font-size:1.4rem; flex-shrink:0;
     }
 
-    .tool-name:hover { text-decoration: underline; }
+    .vinfo { padding:10px 15px; }
+    .vtitle { font-size:.83rem; font-weight:600; color:var(--primary); }
+    .vsub   { font-size:.7rem; color:var(--muted); margin-top:2px; }
 
-    .tool-desc { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
-
-    .tool-github {
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      background: var(--bg);
-      padding: 4px 10px;
-      border-radius: 6px;
-      text-decoration: none;
-      border: 1px solid var(--border);
-      flex-shrink: 0;
+    /* ── AWARDS ── */
+    .award {
+      display:flex; align-items:center; gap:12px;
+      background:#fff;
+      border-radius:9px;
+      padding:13px 15px;
+      border:1px solid var(--border);
+      margin-bottom:9px;
+      transition:box-shadow .2s;
     }
 
-    .tool-github:hover { background: #0f2744; color: white; }
+    .award:hover { box-shadow:0 3px 10px rgba(0,0,0,.08); }
 
-    /* ===== VIDEO ===== */
-    .video-card {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 0;
-      transition: box-shadow 0.2s;
+    .award-ic {
+      width:34px; height:34px;
+      border-radius:8px;
+      background:linear-gradient(135deg,#f59e0b,#d97706);
+      color:#fff; font-size:.85rem;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0;
     }
 
-    .video-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+    .award-txt { font-size:.83rem; font-weight:500; color:var(--text); }
 
-    .video-thumb {
-      width: 80px;
-      height: 60px;
-      background: linear-gradient(135deg, #e63946, #c1121f);
-      display: flex; align-items: center; justify-content: center;
-      color: white;
-      font-size: 1.5rem;
-      flex-shrink: 0;
+    /* ── ACTIVITY GRID ── */
+    .act-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+      gap:14px;
     }
 
-    .video-info { padding: 12px 16px; flex: 1; }
-
-    .video-title {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--primary);
-      text-decoration: none;
+    .act-card {
+      background:#fff;
+      border-radius:12px;
+      padding:16px 18px;
+      border:1px solid var(--border);
     }
 
-    .video-title:hover { text-decoration: underline; }
-
-    .video-sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 3px; }
-
-    /* ===== HONOURS ===== */
-    .award-item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 14px 16px;
-      background: white;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      margin-bottom: 10px;
-      transition: box-shadow 0.2s;
+    .act-card h4 {
+      font-size:.83rem; font-weight:700;
+      color:var(--primary);
+      margin-bottom:9px;
+      display:flex; align-items:center; gap:7px;
     }
 
-    .award-item:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.08); }
+    .act-card ul { padding-left:16px; }
+    .act-card ul li { font-size:.78rem; color:var(--muted); line-height:1.7; }
+    .act-card ul li a { color:var(--primary-light); text-decoration:none; }
+    .act-card ul li a:hover { text-decoration:underline; }
 
-    .award-icon {
-      width: 36px; height: 36px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      display: flex; align-items: center; justify-content: center;
-      color: white;
-      font-size: 0.9rem;
-      flex-shrink: 0;
-    }
+    /* ── RESPONSIVE ── */
+    @media(max-width:768px){
+      :root { --sidebar-w: 0px; --topbar-h: auto; }
 
-    .award-text { font-size: 0.85rem; font-weight: 500; color: var(--text); }
-
-    .activity-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-
-    .activity-card {
-      background: white;
-      border-radius: 12px;
-      padding: 18px;
-      border: 1px solid var(--border);
-    }
-
-    .activity-card h4 {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .activity-card ul { padding-left: 18px; }
-    .activity-card ul li { font-size: 0.8rem; color: var(--text-muted); line-height: 1.7; }
-    .activity-card ul li a { color: var(--primary-light); text-decoration: none; }
-    .activity-card ul li a:hover { text-decoration: underline; }
-
-    /* ===== FOOTER ===== */
-    footer {
-      text-align: center;
-      padding: 12px;
-      font-size: 0.75rem;
-      background: white;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border);
-      flex-shrink: 0;
-    }
-
-    /* ===== SCROLLBAR ===== */
-    main::-webkit-scrollbar { width: 6px; }
-    main::-webkit-scrollbar-track { background: transparent; }
-    main::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-    main::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-
-    aside::-webkit-scrollbar { width: 4px; }
-    aside::-webkit-scrollbar-track { background: transparent; }
-    aside::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-      body { flex-direction: column; }
-
-      aside {
-        position: relative;
-        width: 100%;
+      #app {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr auto;
+        grid-template-areas:
+          "topbar"
+          "sidebar"
+          "main"
+          "footer";
         height: auto;
+        min-height: 100vh;
+        overflow: auto;
+      }
+
+      html, body { overflow: auto; }
+
+      #sidebar {
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content: center;
-        padding: 10px 0;
+        height: auto;
+        padding: 6px 0;
+        overflow: visible;
       }
 
-      .profile-wrap { display: none; }
-      .sidebar-footer { display: none; }
+      .profile-area, .sidebar-social { display:none; }
 
-      nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        width: 100%;
-        padding: 0;
-      }
-
+      nav { display:flex; flex-wrap:wrap; padding:0; }
       nav a {
-        flex: 1 1 auto;
-        padding: 10px 8px;
-        font-size: 0.72rem;
-        text-align: center;
-        border-left: none;
-        border-bottom: 3px solid transparent;
-        justify-content: center;
-        flex-direction: column;
-        gap: 3px;
+        flex:1 1 auto;
+        padding:9px 6px;
+        font-size:.7rem;
+        text-align:center;
+        justify-content:center;
+        flex-direction:column;
+        gap:3px;
+        border-left:none;
+        border-bottom:3px solid transparent;
       }
+      nav a.active { border-bottom-color:var(--accent); border-left-color:transparent; }
 
-      nav a.active { border-bottom-color: var(--accent); border-left-color: transparent; }
-
-      .content-area { margin-left: 0; width: 100%; }
-
-      .about-hero { flex-direction: column; text-align: center; }
-      .about-chips { justify-content: center; }
-
-      main { padding: 16px; }
+      #main { padding:16px; }
+      .hero { flex-direction:column; text-align:center; }
+      .chips { justify-content:center; }
+      #topbar .tb-badge { display:none; }
     }
   </style>
 </head>
 <body>
+<div id="app">
 
-<aside>
-  <div class="profile-wrap">
-    <div class="profile-img-wrap">
-      <img src="sb_PIC.jpg" alt="Dr. Soumyadip Bandyopadhyay" />
+  <!-- SIDEBAR -->
+  <aside id="sidebar">
+    <div class="profile-area">
+      <div class="avatar-ring">
+        <img src="sb_PIC.jpg" alt="Dr. Soumyadip Bandyopadhyay" />
+      </div>
+      <div class="pname">Dr. Soumyadip Bandyopadhyay</div>
+      <div class="ptitle">Research Scientist</div>
+      <div class="porg">🏢 ABB Corporate Research</div>
     </div>
-    <div class="profile-name">Dr. Soumyadip Bandyopadhyay</div>
-    <div class="profile-title">Research Scientist</div>
-    <div class="profile-org">🏢 ABB Corporate Research</div>
-  </div>
 
-  <nav>
-    <a class="menu-item active" data-target="aboutme">
-      <i class="fas fa-user"></i> About Me
-    </a>
-    <a class="menu-item" data-target="education">
-      <i class="fas fa-graduation-cap"></i> Education & Experience
-    </a>
-    <a class="menu-item" data-target="research">
-      <i class="fas fa-flask"></i> Research & Projects
-    </a>
-    <a class="menu-item" data-target="researchshowcase">
-      <i class="fas fa-book-open"></i> Publications
-    </a>
-    <a class="menu-item" data-target="tools">
-      <i class="fas fa-tools"></i> Tools & Talks
-    </a>
-    <a class="menu-item" data-target="honours">
-      <i class="fas fa-trophy"></i> Achievements
-    </a>
-  </nav>
+    <nav>
+      <a class="mi active" data-target="aboutme"><i class="fas fa-user"></i> About Me</a>
+      <a class="mi" data-target="education"><i class="fas fa-graduation-cap"></i> Education & Experience</a>
+      <a class="mi" data-target="research"><i class="fas fa-flask"></i> Research & Projects</a>
+      <a class="mi" data-target="researchshowcase"><i class="fas fa-book-open"></i> Publications</a>
+      <a class="mi" data-target="tools"><i class="fas fa-tools"></i> Tools & Talks</a>
+      <a class="mi" data-target="honours"><i class="fas fa-trophy"></i> Achievements</a>
+    </nav>
 
-  <div class="sidebar-footer">
     <div class="sidebar-social">
       <a href="https://scholar.google.co.in/citations?user=P_crwNgAAAAJ&hl=en" target="_blank" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
       <a href="https://dblp.org/pid/48/8657.html" target="_blank" title="DBLP"><i class="fas fa-database"></i></a>
       <a href="mailto:soumyadip.bandyopadhyay@in.abb.com" title="Email"><i class="fas fa-envelope"></i></a>
       <a href="https://github.com/soumyadipcsis" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
     </div>
-  </div>
-</aside>
+  </aside>
 
-<div class="content-area">
-
-  <div class="topbar">
+  <!-- TOPBAR -->
+  <header id="topbar">
     <div>
-      <span class="topbar-title">Research Portfolio</span>
-      <span class="topbar-sub">— Dr. Soumyadip Bandyopadhyay</span>
+      <span class="tb-title" id="tb-title">About Me</span>
+      <span class="tb-sub">— Dr. Soumyadip Bandyopadhyay</span>
     </div>
-    <span class="topbar-badge">🇮🇳 ABB Corporate Research · India</span>
-  </div>
+    <span class="tb-badge">🇮🇳 ABB Corporate Research · India</span>
+  </header>
 
-  <main>
+  <!-- MAIN -->
+  <main id="main">
 
-    <!-- ===== ABOUT ME ===== -->
+    <!-- ABOUT ME -->
     <section id="aboutme" class="active">
-      <div class="about-hero">
-        <img class="about-hero-img" src="sb_PIC.jpg" alt="Dr. Soumyadip Bandyopadhyay" />
-        <div class="about-hero-text">
+      <div class="hero">
+        <img src="sb_PIC.jpg" alt="Dr. Soumyadip Bandyopadhyay" />
+        <div>
           <h2>Dr. Soumyadip Bandyopadhyay</h2>
-          <p>Research Scientist at ABB Corporate Research Lab · IIT Kharagpur Ph.D. · Formal Methods & AI</p>
-          <div class="about-chips">
+          <p>Research Scientist · ABB Corporate Research Lab · IIT Kharagpur Ph.D. · Formal Methods &amp; AI</p>
+          <div class="chips">
             <span class="chip">🔬 Formal Verification</span>
             <span class="chip">🤖 Generative AI</span>
             <span class="chip">⚙️ PLC Verification</span>
@@ -916,85 +760,41 @@
       <div class="card">
         <div class="card-title"><i class="fas fa-id-badge" style="color:var(--primary-light)"></i> Biography</div>
         <div class="about-body">
-          <p>Hello! I am <strong>Soumyadip Bandyopadhyay</strong>, currently working as a <strong>Scientist</strong> at the <strong>ABB Corporate Research Lab</strong> since July 2023. My current research focuses on the <em>verification of PLC programs</em> during software migration and upgrades, <em>validation of Generative AI outputs</em>, and pioneering methods in <em>forward engineering using Large Language Models (LLMs)</em>. At ABB, I am proud to be part of a global innovation ecosystem that blends engineering excellence with cutting-edge research.</p>
-          <p>I earned my <strong>Ph.D.</strong> from the prestigious <strong>Indian Institute of Technology, Kharagpur (IIT Kharagpur)</strong>, specializing in <strong>Formal Methods</strong> and <strong>Software Engineering</strong>. My doctoral studies cultivated a deep interest in rigorous system design, verification, and advanced software development techniques.</p>
-          <p>Following my Ph.D., my professional journey began as a <strong>Postdoctoral Researcher</strong> at the renowned <strong>Hasso Plattner Institute</strong> in Germany. Subsequently, I embraced academia as an <strong>Assistant Professor</strong> at <strong>BITS Pilani, Goa Campus</strong> for 3.5 enriching years. I then joined <strong>NVIDIA</strong> as a <strong>Senior Formal Verification Engineer</strong>, working on <strong>Data Path Verification (DPV)</strong> using <strong>VC Formal</strong> and <strong>JasperGold</strong>.</p>
-          <p>Outside of my professional life, I am passionately interested in <strong>world politics</strong>, the rich traditions of <strong>folk music</strong>, <strong>writing poetry</strong>, and performing heartfelt <strong>recitations</strong>.</p>
+          <p>Hello! I am <strong>Soumyadip Bandyopadhyay</strong>, currently working as a <strong>Scientist</strong> at the <strong>ABB Corporate Research Lab</strong> since July 2023. My research focuses on <em>verification of PLC programs</em> during software migration and upgrades, <em>validation of Generative AI outputs</em>, and pioneering methods in <em>forward engineering using LLMs</em>.</p>
+          <p>I earned my <strong>Ph.D.</strong> from <strong>IIT Kharagpur</strong>, specializing in <strong>Formal Methods</strong> and <strong>Software Engineering</strong>. My professional journey includes a <strong>Postdoctoral Research</strong> at <strong>Hasso Plattner Institute, Germany</strong>, <strong>Assistant Professorship</strong> at <strong>BITS Pilani, Goa</strong> for 3.5 years, and a role as <strong>Senior Formal Verification Engineer</strong> at <strong>NVIDIA</strong> working on <strong>Data Path Verification</strong> with <strong>VC Formal</strong> and <strong>JasperGold</strong>.</p>
+          <p>Outside work, I am passionate about <strong>world politics</strong>, <strong>folk music</strong>, <strong>writing poetry</strong>, and performing <strong>recitations</strong>.</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-title"><i class="fas fa-address-card" style="color:var(--primary-light)"></i> Contact Information</div>
         <div class="contact-grid">
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fas fa-briefcase"></i></div>
-            <div>
-              <div class="contact-label">Position</div>
-              <div class="contact-value">Research Scientist</div>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fas fa-phone"></i></div>
-            <div>
-              <div class="contact-label">Mobile</div>
-              <div class="contact-value">+91 8900270263</div>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-            <div>
-              <div class="contact-label">Official Email</div>
-              <div class="contact-value"><a href="mailto:soumyadip.bandyopadhyay@in.abb.com">soumyadip.bandyopadhyay@in.abb.com</a></div>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fas fa-envelope-open"></i></div>
-            <div>
-              <div class="contact-label">Personal Email</div>
-              <div class="contact-value"><a href="mailto:soumyadipcse@gmail.com">soumyadipcse@gmail.com</a></div>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-            <div>
-              <div class="contact-label">Location</div>
-              <div class="contact-value">India 🇮🇳</div>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fas fa-building"></i></div>
-            <div>
-              <div class="contact-label">Organization</div>
-              <div class="contact-value">ABB Corporate Research</div>
-            </div>
-          </div>
+          <div class="ci"><div class="ci-icon"><i class="fas fa-briefcase"></i></div><div><div class="ci-lbl">Position</div><div class="ci-val">Research Scientist</div></div></div>
+          <div class="ci"><div class="ci-icon"><i class="fas fa-phone"></i></div><div><div class="ci-lbl">Mobile</div><div class="ci-val">+91 8900270263</div></div></div>
+          <div class="ci"><div class="ci-icon"><i class="fas fa-envelope"></i></div><div><div class="ci-lbl">Official Email</div><div class="ci-val"><a href="mailto:soumyadip.bandyopadhyay@in.abb.com">soumyadip.bandyopadhyay@in.abb.com</a></div></div></div>
+          <div class="ci"><div class="ci-icon"><i class="fas fa-envelope-open"></i></div><div><div class="ci-lbl">Personal Email</div><div class="ci-val"><a href="mailto:soumyadipcse@gmail.com">soumyadipcse@gmail.com</a></div></div></div>
+          <div class="ci"><div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div><div><div class="ci-lbl">Location</div><div class="ci-val">India 🇮🇳</div></div></div>
+          <div class="ci"><div class="ci-icon"><i class="fas fa-building"></i></div><div><div class="ci-lbl">Organization</div><div class="ci-val">ABB Corporate Research</div></div></div>
         </div>
-        <a href="CVSoumyadip.pdf" target="_blank" class="resume-btn">
-          <i class="fas fa-download"></i> Download Resume (CV)
-        </a>
+        <a href="CVSoumyadip.pdf" target="_blank" class="resume-btn"><i class="fas fa-download"></i> Download Resume</a>
       </div>
     </section>
 
-    <!-- ===== EDUCATION ===== -->
+    <!-- EDUCATION -->
     <section id="education">
-      <div class="section-header">
-        <div class="section-header-icon"><i class="fas fa-graduation-cap"></i></div>
-        <h2>Education & Work Experience</h2>
-      </div>
+      <div class="sh"><div class="sh-icon"><i class="fas fa-graduation-cap"></i></div><h2>Education &amp; Work Experience</h2></div>
 
       <div class="card">
         <div class="card-title"><i class="fas fa-university" style="color:var(--primary-light)"></i> Education</div>
-
         <div class="edu-card">
           <div class="edu-badge">Ph.D. · 2009–2017</div>
           <h4>Indian Institute of Technology, Kharagpur</h4>
-          <p>West Bengal, India · Computer Science and Engineering · Formal Verification Research Group</p>
+          <p>West Bengal, India · CSE · Formal Verification Research Group</p>
           <p style="margin-top:6px"><strong>Thesis:</strong> Path Based Equivalence Checking of Petri Net Representation of Programs for Translation Validation &nbsp;
-            <a href="sdipPhDThesis.pdf" target="_blank" style="color:var(--primary-light);font-size:0.75rem;font-weight:600"><i class="fas fa-external-link-alt"></i> View Thesis</a>
+            <a href="sdipPhDThesis.pdf" target="_blank" style="color:var(--primary-light);font-size:.72rem;font-weight:600"><i class="fas fa-external-link-alt"></i> View Thesis</a>
           </p>
         </div>
-
-        <div class="edu-card" style="border-left-color: var(--accent2);">
+        <div class="edu-card" style="border-left-color:var(--accent2)">
           <div class="edu-badge" style="background:#fff7ed;color:#9a3412">B.Tech · 2004–2008</div>
           <h4>West Bengal University of Technology, Kolkata</h4>
           <p>West Bengal, India · Computer Science and Engineering</p>
@@ -1004,50 +804,23 @@
       <div class="card">
         <div class="card-title"><i class="fas fa-briefcase" style="color:var(--primary-light)"></i> Work Experience</div>
         <div class="timeline">
-          <div class="timeline-item current">
-            <div class="timeline-org">ABB Corporate Research</div>
-            <div class="timeline-role">Research Scientist</div>
-            <span class="timeline-period"><i class="fas fa-calendar-alt"></i> July 2023 – Present</span>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-org">NVIDIA</div>
-            <div class="timeline-role">Senior Formal Verification Engineer</div>
-            <span class="timeline-period"><i class="fas fa-calendar-alt"></i> May 2022 – June 2023</span>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-org">BITS Pilani K K Birla Goa Campus</div>
-            <div class="timeline-role">Assistant Professor</div>
-            <span class="timeline-period"><i class="fas fa-calendar-alt"></i> Dec 2018 – May 2022</span>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-org">Hasso Plattner Institute, Germany</div>
-            <div class="timeline-role">Post-Doctoral Fellow · System Analysis and Modeling Group</div>
-            <span class="timeline-period"><i class="fas fa-calendar-alt"></i> Aug 2017 – Oct 2018</span>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-org">BITS Pilani K K Birla Goa Campus</div>
-            <div class="timeline-role">Assistant Professor</div>
-            <span class="timeline-period"><i class="fas fa-calendar-alt"></i> Dec 2016 – July 2017</span>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-org">BITS Pilani K K Birla Goa Campus</div>
-            <div class="timeline-role">Visiting Faculty</div>
-            <span class="timeline-period"><i class="fas fa-calendar-alt"></i> Sep 2015 – Dec 2016</span>
-          </div>
+          <div class="ti cur"><div class="ti-org">ABB Corporate Research</div><div class="ti-role">Research Scientist</div><span class="ti-period"><i class="fas fa-calendar-alt"></i> July 2023 – Present</span></div>
+          <div class="ti"><div class="ti-org">NVIDIA</div><div class="ti-role">Senior Formal Verification Engineer</div><span class="ti-period"><i class="fas fa-calendar-alt"></i> May 2022 – June 2023</span></div>
+          <div class="ti"><div class="ti-org">BITS Pilani K K Birla Goa Campus</div><div class="ti-role">Assistant Professor</div><span class="ti-period"><i class="fas fa-calendar-alt"></i> Dec 2018 – May 2022</span></div>
+          <div class="ti"><div class="ti-org">Hasso Plattner Institute, Germany</div><div class="ti-role">Post-Doctoral Fellow · System Analysis and Modeling Group</div><span class="ti-period"><i class="fas fa-calendar-alt"></i> Aug 2017 – Oct 2018</span></div>
+          <div class="ti"><div class="ti-org">BITS Pilani K K Birla Goa Campus</div><div class="ti-role">Assistant Professor</div><span class="ti-period"><i class="fas fa-calendar-alt"></i> Dec 2016 – July 2017</span></div>
+          <div class="ti"><div class="ti-org">BITS Pilani K K Birla Goa Campus</div><div class="ti-role">Visiting Faculty</div><span class="ti-period"><i class="fas fa-calendar-alt"></i> Sep 2015 – Dec 2016</span></div>
         </div>
       </div>
     </section>
 
-    <!-- ===== RESEARCH ===== -->
+    <!-- RESEARCH -->
     <section id="research">
-      <div class="section-header">
-        <div class="section-header-icon"><i class="fas fa-flask"></i></div>
-        <h2>Research Interests & Projects</h2>
-      </div>
+      <div class="sh"><div class="sh-icon"><i class="fas fa-flask"></i></div><h2>Research Interests &amp; Projects</h2></div>
 
       <div class="card">
         <div class="card-title"><i class="fas fa-lightbulb" style="color:var(--primary-light)"></i> Research Interests</div>
-        <div class="tags-wrap">
+        <div class="tags">
           <span class="tag">🔷 Formal Methods</span>
           <span class="tag">🔷 Program Equivalence</span>
           <span class="tag">🔷 Software Verification</span>
@@ -1061,274 +834,146 @@
 
       <div class="card">
         <div class="card-title"><i class="fas fa-industry" style="color:var(--primary-light)"></i> Industrial Projects</div>
-        <div class="project-card">
+        <div class="proj">
           <h4><i class="fas fa-robot" style="color:var(--primary-light)"></i> CodeGenAI</h4>
-          <div class="project-meta">
-            <span class="project-badge badge-blue"><i class="fas fa-link"></i> <a href="https://www.etfa2024.org/" target="_blank" style="color:inherit;text-decoration:none">ETFA 2024</a></span>
+          <div class="pmeta">
+            <span class="badge b-blue"><a href="https://www.etfa2024.org/" target="_blank" style="color:inherit;text-decoration:none">ETFA 2024</a></span>
           </div>
-          <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:8px">Exploring the potential of Generative AI and LLMs to support control engineering.</p>
-          <ul>
-            <li>Generation of control logic utilizing ABB control libraries and ABB notations.</li>
-            <li>Generation of test code to improve quality and save efforts in FAT.</li>
-            <li>Streamlined UI for control engineers to interact with GenAI.</li>
-          </ul>
+          <ul><li>Generation of control logic using ABB control libraries and notations.</li><li>Generation of test code to improve quality and save FAT efforts.</li><li>Streamlined UI for control engineers to interact with GenAI.</li></ul>
         </div>
-        <div class="project-card">
+        <div class="proj">
           <h4><i class="fas fa-check-double" style="color:var(--primary-light)"></i> GenAI4SamaTulyata</h4>
-          <div class="project-meta">
-            <span class="project-badge badge-purple">FSE 2025 Poster Track</span>
-          </div>
-          <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:8px">Proving functional equivalence for Software Migration and Software Evolution.</p>
-          <ul>
-            <li>Building a tool for equivalence checker for software migration and evolution.</li>
-            <li>Model constructor carried out by LLM and verified using formal verification tools.</li>
-            <li>Check LLM hallucination using automated reasoning methods.</li>
-          </ul>
+          <div class="pmeta"><span class="badge b-purple">FSE 2025 Poster Track</span></div>
+          <ul><li>Tool for equivalence checker for software migration and evolution.</li><li>Model constructor by LLM, verified using formal verification tools.</li><li>LLM hallucination detection via automated reasoning methods.</li></ul>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-title"><i class="fas fa-dollar-sign" style="color:var(--primary-light)"></i> Sponsored & Consultancy Projects</div>
-        <div class="project-card">
-          <h4>"APP based learning for Python program"</h4>
-          <div class="project-meta">
-            <span class="project-badge badge-green">6th Sense & AGH Advisor</span>
-            <span class="project-badge badge-orange">2021–2023</span>
-            <span class="project-badge badge-blue">₹15.81L</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <h4>"Modelling and Verification of Bio-Inspired System"</h4>
-          <div class="project-meta">
-            <span class="project-badge badge-green">DST under BIO-CPS Incubation</span>
-            <span class="project-badge badge-orange">2020–2025</span>
-            <span class="project-badge badge-blue">₹40L</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <h4>"AES: Automated Evaluation Systems for Computer Programming Course"</h4>
-          <div class="project-meta">
-            <span class="project-badge badge-green">BITS Pilani</span>
-            <span class="project-badge badge-orange">2018–2021</span>
-            <span class="project-badge badge-blue">₹2L</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <h4>"SamaTulyata: Automated Evaluation for Computer Programming Course"</h4>
-          <div class="project-meta">
-            <span class="project-badge badge-green">TLC BITS Goa</span>
-            <span class="project-badge badge-orange">2019–2020</span>
-            <span class="project-badge badge-blue">₹1L</span>
-          </div>
-        </div>
+        <div class="card-title"><i class="fas fa-dollar-sign" style="color:var(--primary-light)"></i> Sponsored &amp; Consultancy Projects</div>
+        <div class="proj"><h4>"APP based learning for Python program"</h4><div class="pmeta"><span class="badge b-green">6th Sense &amp; AGH Advisor</span><span class="badge b-orange">2021–2023</span><span class="badge b-blue">₹15.81L</span></div></div>
+        <div class="proj"><h4>"Modelling and Verification of Bio-Inspired System"</h4><div class="pmeta"><span class="badge b-green">DST BIO-CPS</span><span class="badge b-orange">2020–2025</span><span class="badge b-blue">₹40L</span></div></div>
+        <div class="proj"><h4>"AES: Automated Evaluation Systems for Programming Course"</h4><div class="pmeta"><span class="badge b-green">BITS Pilani</span><span class="badge b-orange">2018–2021</span><span class="badge b-blue">₹2L</span></div></div>
+        <div class="proj"><h4>"SamaTulyata: Automated Evaluation for Programming Course"</h4><div class="pmeta"><span class="badge b-green">TLC BITS Goa</span><span class="badge b-orange">2019–2020</span><span class="badge b-blue">₹1L</span></div></div>
       </div>
     </section>
 
-    <!-- ===== PUBLICATIONS ===== -->
+    <!-- PUBLICATIONS -->
     <section id="researchshowcase">
-      <div class="section-header">
-        <div class="section-header-icon"><i class="fas fa-book-open"></i></div>
-        <h2>Publications</h2>
-      </div>
-
+      <div class="sh"><div class="sh-icon"><i class="fas fa-book-open"></i></div><h2>Publications</h2></div>
       <div class="card">
-        <div class="pub-section-label">
-          <i class="fas fa-journal-whills" style="color:var(--primary-light)"></i>
-          Journal Publications <span class="count-badge">3</span>
-        </div>
-        <div class="pub-item"><span class="pub-number">1</span><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar, Chittaranjan Mandal, Holger Giese, "Translation Validation of Coloured Petri Net Models of Programs on Integers", <strong>Acta Informatica</strong>, Vol. 59, Issue: 3, pp. 725–759.</div>
-        <div class="pub-item"><span class="pub-number">2</span><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar, Chittaranjan Mandal, "Equivalence checking of Petri net models of programs using static and dynamic cut-points", <strong>Acta Informatica</strong>, Vol. 54, Issue: 4, pp. 321–381.</div>
-        <div class="pub-item"><span class="pub-number">3</span><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar, Kunal Banerjee, Chittaranjan A. Mandal, Krishnam Raju, "A Path Construction Algorithm for Translation Validation using PRES+ Models", <strong>Parallel Processing Letters</strong>, Vol. 26, Issue: 2, pp. 1–18.</div>
+        <div class="pub-sec"><i class="fas fa-journal-whills" style="color:var(--primary-light)"></i> Journal Publications <span class="cnt">3</span></div>
+        <div class="pub"><span class="pnum">1</span><strong>Soumyadip Bandyopadhyay</strong>, D. Sarkar, C. Mandal, H. Giese, "Translation Validation of Coloured Petri Net Models of Programs on Integers", <strong>Acta Informatica</strong>, Vol.59, Issue:3, pp.725–759.</div>
+        <div class="pub"><span class="pnum">2</span><strong>Soumyadip Bandyopadhyay</strong>, D. Sarkar, C. Mandal, "Equivalence checking of Petri net models using static and dynamic cut-points", <strong>Acta Informatica</strong>, Vol.54, Issue:4, pp.321–381.</div>
+        <div class="pub"><span class="pnum">3</span><strong>Soumyadip Bandyopadhyay</strong>, D. Sarkar, K. Banerjee, C.A. Mandal, K. Raju, "A Path Construction Algorithm for Translation Validation using PRES+ Models", <strong>Parallel Processing Letters</strong>, Vol.26, Issue:2, pp.1–18.</div>
 
-        <div class="pub-section-label" style="margin-top:24px">
-          <i class="fas fa-users" style="color:var(--primary-light)"></i>
-          Conference & Workshop Publications <span class="count-badge">23</span>
-        </div>
-        <div class="pub-item"><span class="pub-number">1</span><strong>Soumyadip Bandyopadhyay</strong> and Santonu Sarkar, "Antarbhukti: Verifying Correctness of PLC Software during System Evolution", <strong>ATVA 2025</strong> <span class="pub-venue venue-b">Core B</span></div>
-        <div class="pub-item"><span class="pub-number">2</span><strong>Soumyadip Bandyopadhyay</strong> and Raoul Jetley, "Pn4PLC: Verification of Software Upgrade for PLC Code", <strong>FSE 2025</strong> <span class="pub-venue venue-a-star">Core A★</span></div>
-        <div class="pub-item"><span class="pub-number">3</span>Md Tauseef Alam, Sorbajit Goswami, Khushi Singh, Raju Halder, Abyayananda Maiti and <strong>Soumyadip Bandyopadhyay</strong>, "SolGen: Secure Smart Contract Code Generation Using LLMs Via Masked Prompting", <strong>ISEC 2025</strong></div>
-        <div class="pub-item"><span class="pub-number">4</span>Heiko Koziolek, Virendra Ashiwal, <strong>Soumyadip Bandyopadhyay</strong> and Chandrika K R, "Automated Control Logic Test Case Generation using LLMs", <strong>ETFA 2024</strong></div>
-        <div class="pub-item"><span class="pub-number">5</span>Rakshit Mittal, Dominique Blouin, Anish Bhobe, and <strong>Soumyadip Bandyopadhyay</strong>, "Solving the Instance Model-View Update Problem in AADL", <strong>MODELS 2022</strong> <span class="pub-venue venue-a">Core A</span></div>
-        <div class="pub-item"><span class="pub-number">6</span>Rakshit Mittal, Dominique Blouin, <strong>Soumyadip Bandyopadhyay</strong>, "PNPEq: Verification of Scheduled Conditional Behavior in Embedded Software", <strong>APSEC 2021</strong> <span class="pub-venue venue-b">Core B</span></div>
-        <div class="pub-item"><span class="pub-number">7</span>Rakshit Mittal, Dominique Blouin and <strong>Soumyadip Bandyopadhyay</strong>, "Validating Extended Feature Model Configurations using Petri Nets", <strong>Petri Nets Workshop 2021</strong></div>
-        <div class="pub-item"><span class="pub-number">8</span>Rakshit Mittal and <strong>Soumyadip Bandyopadhyay</strong>, "Translation Validation of Scheduled Conditional Behavior using PN", <strong>Petri Nets Workshop 2021</strong></div>
-        <div class="pub-item"><span class="pub-number">9</span>Rakshit Mittal, Rochishnu Banerjee, Dominique Blouin, <strong>Soumyadip Bandyopadhyay</strong>, "Towards an Approach for Translation Validation of Thread-level Parallelizing Transformations using CPNs", <strong>ICSOFT 2021</strong> 🏆 <em>Best Paper</em> <span class="pub-venue venue-b">Core B</span></div>
-        <div class="pub-item"><span class="pub-number">10</span>Rakshit Mittal, Rochisnu Banerjee, Santonu Sarkar, <strong>Soumyadip Bandyopadhyay</strong>, "Translation Validation of Loop involving Code Optimizing Transformations using PN", <strong>Petri Nets Workshop 2020</strong></div>
-        <div class="pub-item"><span class="pub-number">11</span>Shivam, Nilanjana Goswami, Veeky Baths, <strong>Soumyadip Bandyopadhyay</strong>, "AES: Automated Evaluation Systems for Computer Programming Course", <strong>ICSOFT 2019</strong> <span class="pub-venue venue-b">Core B</span></div>
-        <div class="pub-item"><span class="pub-number">12</span><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar, Chittaranjan Mandal, "SamaTulyataOne: A Path Based Equivalence Checker", <strong>ISEC 2019</strong></div>
-        <div class="pub-item"><span class="pub-number">13</span>Santonu Sarkar, Prateek Kandelwal, <strong>Soumyadip Bandyopadhyay</strong> and Holger Giese, "Analysis of GPGPU Programs for Data-race and Barrier Divergence", <strong>ICSOFT 2018</strong> <span class="pub-venue venue-b">Core B</span></div>
-        <div class="pub-item"><span class="pub-number">14</span><strong>Soumyadip Bandyopadhyay</strong>, Santonu Sarkar, Dipankar Sarkar and Chittaranjan Mandal, "SamaTulyata, An Efficient Path Based Equivalence Checking Tool", <strong>ATVA 2017</strong> <span class="pub-venue venue-a">Core A</span></div>
-        <div class="pub-item"><span class="pub-number">15</span><strong>Soumyadip Bandyopadhyay</strong>, Santonu Sarkar and Kunal Banerjee, "An End-to-End Formal Verifier for Parallel Programs", <strong>ICSOFT 2017</strong> <span class="pub-venue venue-b">Core B</span></div>
-        <div class="pub-item"><span class="pub-number">16</span><strong>Soumyadip Bandyopadhyay</strong> and Kunal Banerjee, "PRESGen: A Fully Automatic Equivalence Checker for Validating Optimizing and Parallelizing Transformations", <strong>HPDC Workshop 2017</strong></div>
-        <div class="pub-item"><span class="pub-number">17</span><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar and Chittaranjan Mandal, "An efficient path based equivalence checking for Petri net based models of programs", <strong>ISEC 2016</strong></div>
-        <div class="pub-item"><span class="pub-number">18</span><strong>Soumyadip Bandyopadhyay</strong> and Kunal Banerjee, "Implementing an Efficient Path Based Equivalence Checker for Parallel Programs", <strong>HPDC Workshop 2016</strong></div>
-        <div class="pub-item"><span class="pub-number">19</span>Kunal Banerjee, <strong>Soumyadip Bandyopadhyay</strong> and Santonu Sarkar, "Data-Race Detection: The Missing Piece for an End-to-End Semantic Equivalence Checker", <strong>PLDI Workshop 2016</strong></div>
-        <div class="pub-item"><span class="pub-number">20</span><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar and Chittaranjan Mandal, "Validating SPARK: High Level Synthesis compiler", <strong>ISVLSI 2015</strong></div>
-        <div class="pub-item"><span class="pub-number">21</span><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar and Chittaranjan Mandal, "A Path-Based Equivalence Checking Method for Petri net based Models", <strong>ICSOFT-EA 2015</strong> <span class="pub-venue venue-b">Core B</span></div>
-        <div class="pub-item"><span class="pub-number">22</span><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar, Chittaranjan A. Mandal, "An Efficient Equivalence Checking Method for Petri net based Models of Programs", <strong>ICSE 2015</strong> <span class="pub-venue venue-a-star">Core A★</span></div>
-        <div class="pub-item"><span class="pub-number">23</span><strong>Soumyadip Bandyopadhyay</strong>, Kunal Banerjee, Dipankar Sarkar, Chittaranjan A. Mandal, "Translation Validation for PRES+ Models of Parallel Behaviours via FSMD Equivalence Checker", <strong>VDAT 2012</strong></div>
+        <div class="pub-sec" style="margin-top:22px"><i class="fas fa-users" style="color:var(--primary-light)"></i> Conference &amp; Workshop Publications <span class="cnt">23</span></div>
+        <div class="pub"><span class="pnum">1</span><strong>Soumyadip Bandyopadhyay</strong> and S. Sarkar, "Antarbhukti: Verifying Correctness of PLC Software during System Evolution", <strong>ATVA 2025</strong> <span class="vbadge v-b">Core B</span></div>
+        <div class="pub"><span class="pnum">2</span><strong>Soumyadip Bandyopadhyay</strong> and R. Jetley, "Pn4PLC: Verification of Software Upgrade for PLC Code", <strong>FSE 2025</strong> <span class="vbadge v-astar">Core A★</span></div>
+        <div class="pub"><span class="pnum">3</span>Md T. Alam et al. and <strong>Soumyadip Bandyopadhyay</strong>, "SolGen: Secure Smart Contract Code Generation Using LLMs Via Masked Prompting", <strong>ISEC 2025</strong></div>
+        <div class="pub"><span class="pnum">4</span>H. Koziolek, V. Ashiwal, <strong>Soumyadip Bandyopadhyay</strong> and C.K.R, "Automated Control Logic Test Case Generation using LLMs", <strong>ETFA 2024</strong></div>
+        <div class="pub"><span class="pnum">5</span>R. Mittal, D. Blouin, A. Bhobe and <strong>Soumyadip Bandyopadhyay</strong>, "Solving the Instance Model-View Update Problem in AADL", <strong>MODELS 2022</strong> <span class="vbadge v-a">Core A</span></div>
+        <div class="pub"><span class="pnum">6</span>R. Mittal, D. Blouin, <strong>Soumyadip Bandyopadhyay</strong>, "PNPEq: Verification of Scheduled Conditional Behavior in Embedded Software", <strong>APSEC 2021</strong> <span class="vbadge v-b">Core B</span></div>
+        <div class="pub"><span class="pnum">7</span>R. Mittal, D. Blouin, <strong>Soumyadip Bandyopadhyay</strong>, "Validating Extended Feature Model Configurations using Petri Nets", <strong>Petri Nets Workshop 2021</strong></div>
+        <div class="pub"><span class="pnum">8</span>R. Mittal and <strong>Soumyadip Bandyopadhyay</strong>, "Translation Validation of Scheduled Conditional Behavior using PN", <strong>Petri Nets Workshop 2021</strong></div>
+        <div class="pub"><span class="pnum">9</span>R. Mittal, R. Banerjee, D. Blouin, <strong>Soumyadip Bandyopadhyay</strong>, "Translation Validation of Thread-level Parallelizing Transformations using CPNs", <strong>ICSOFT 2021</strong> 🏆 <em>Best Paper</em> <span class="vbadge v-b">Core B</span></div>
+        <div class="pub"><span class="pnum">10</span>R. Mittal et al. and <strong>Soumyadip Bandyopadhyay</strong>, "Translation Validation of Loop Optimizing Transformations using PN", <strong>Petri Nets Workshop 2020</strong></div>
+        <div class="pub"><span class="pnum">11</span>Shivam, N. Goswami, V. Baths, <strong>Soumyadip Bandyopadhyay</strong>, "AES: Automated Evaluation Systems for Programming Course", <strong>ICSOFT 2019</strong> <span class="vbadge v-b">Core B</span></div>
+        <div class="pub"><span class="pnum">12</span><strong>Soumyadip Bandyopadhyay</strong>, D. Sarkar, C. Mandal, "SamaTulyataOne: A Path Based Equivalence Checker", <strong>ISEC 2019</strong></div>
+        <div class="pub"><span class="pnum">13</span>S. Sarkar, P. Kandelwal, <strong>Soumyadip Bandyopadhyay</strong>, H. Giese, "Analysis of GPGPU Programs for Data-race and Barrier Divergence", <strong>ICSOFT 2018</strong> <span class="vbadge v-b">Core B</span></div>
+        <div class="pub"><span class="pnum">14</span><strong>Soumyadip Bandyopadhyay</strong>, S. Sarkar, D. Sarkar, C. Mandal, "SamaTulyata, An Efficient Path Based Equivalence Checking Tool", <strong>ATVA 2017</strong> <span class="vbadge v-a">Core A</span></div>
+        <div class="pub"><span class="pnum">15</span><strong>Soumyadip Bandyopadhyay</strong>, S. Sarkar, K. Banerjee, "An End-to-End Formal Verifier for Parallel Programs", <strong>ICSOFT 2017</strong> <span class="vbadge v-b">Core B</span></div>
+        <div class="pub"><span class="pnum">16</span><strong>Soumyadip Bandyopadhyay</strong> and K. Banerjee, "PRESGen: A Fully Automatic Equivalence Checker for Optimizing and Parallelizing Transformations", <strong>HPDC Workshop 2017</strong></div>
+        <div class="pub"><span class="pnum">17</span><strong>Soumyadip Bandyopadhyay</strong>, D. Sarkar, C. Mandal, "An efficient path based equivalence checking for PN models", <strong>ISEC 2016</strong></div>
+        <div class="pub"><span class="pnum">18</span><strong>Soumyadip Bandyopadhyay</strong> and K. Banerjee, "Implementing an Efficient Path Based Equivalence Checker for Parallel Programs", <strong>HPDC Workshop 2016</strong></div>
+        <div class="pub"><span class="pnum">19</span>K. Banerjee, <strong>Soumyadip Bandyopadhyay</strong>, S. Sarkar, "Data-Race Detection for End-to-End Semantic Equivalence Checker", <strong>PLDI Workshop 2016</strong></div>
+        <div class="pub"><span class="pnum">20</span><strong>Soumyadip Bandyopadhyay</strong>, D. Sarkar, C. Mandal, "Validating SPARK: High Level Synthesis compiler", <strong>ISVLSI 2015</strong></div>
+        <div class="pub"><span class="pnum">21</span><strong>Soumyadip Bandyopadhyay</strong>, D. Sarkar, C. Mandal, "A Path-Based Equivalence Checking Method for PN Models", <strong>ICSOFT-EA 2015</strong> <span class="vbadge v-b">Core B</span></div>
+        <div class="pub"><span class="pnum">22</span><strong>Soumyadip Bandyopadhyay</strong>, D. Sarkar, C.A. Mandal, "An Efficient Equivalence Checking Method for PN Models", <strong>ICSE 2015</strong> <span class="vbadge v-astar">Core A★</span></div>
+        <div class="pub"><span class="pnum">23</span><strong>Soumyadip Bandyopadhyay</strong>, K. Banerjee, D. Sarkar, C.A. Mandal, "Translation Validation for PRES+ Models via FSMD Equivalence Checker", <strong>VDAT 2012</strong></div>
 
-        <div class="pub-section-label" style="margin-top:24px">
-          <i class="fas fa-image" style="color:var(--primary-light)"></i>
-          Poster Publications <span class="count-badge">2</span>
-        </div>
-        <div class="pub-item"><span class="pub-number">1</span><strong>Soumyadip Bandyopadhyay</strong>, "Behavioural verification using Petri net based models of programs", <strong>POPL 2015</strong> – ACM Student Research Competition</div>
-        <div class="pub-item"><span class="pub-number">2</span><strong>Soumyadip Bandyopadhyay</strong>, Dipankar Sarkar and Chittaranjan A. Mandal, "Translation Validation using Path-Based Equivalence Checking of Petri net Models", <strong>WEPL 2015</strong></div>
+        <div class="pub-sec" style="margin-top:22px"><i class="fas fa-image" style="color:var(--primary-light)"></i> Poster Publications <span class="cnt">2</span></div>
+        <div class="pub"><span class="pnum">1</span><strong>Soumyadip Bandyopadhyay</strong>, "Behavioural verification using PN models of programs", <strong>POPL 2015</strong> – ACM Student Research Competition</div>
+        <div class="pub"><span class="pnum">2</span><strong>Soumyadip Bandyopadhyay</strong>, D. Sarkar, C.A. Mandal, "Translation Validation using Path-Based Equivalence Checking of PN Models", <strong>WEPL 2015</strong></div>
 
-        <div class="pub-section-label" style="margin-top:24px">
-          <i class="fas fa-book" style="color:var(--primary-light)"></i>
-          Book Chapters <span class="count-badge">3</span>
-        </div>
-        <div class="pub-item"><span class="pub-number">1</span>Bedir Tekinerdogan, Rakshit Mittal, Rima Al-Ali, Mauro Iaconod, Eva Navarroe, <strong>Soumyadip Bandyopadhyay</strong>, et al., "A feature-based ontology for cyber physical systems", <strong>Chapter 3, Multi-Paradigm Modelling Approaches for Cyber-Physical, Elsevier Press</strong>. ISBN: 9780128191064</div>
-        <div class="pub-item"><span class="pub-number">2</span>Holger Giese, Dominique Blouin, Rima Al-Ali, Hana Mkaoua, <strong>Soumyadip Bandyopadhyay</strong>, et al., "An ontology for multiparadigm modelling", <strong>Chapter 4, Multi-Paradigm Modelling Approaches for Cyber-Physical, Elsevier Press</strong>. ISBN: 9780128191064</div>
-        <div class="pub-item"><span class="pub-number">3</span>Dominique Blouin, Rima Al-Ali, Holger Giese, Stefan Klikovits, <strong>Soumyadip Bandyopadhyay</strong>, et al., "An integrated ontology for multi-paradigm modelling for cyber-physical systems", <strong>Chapter 5, Multi-Paradigm Modelling Approaches for Cyber-Physical, Elsevier Press</strong>. ISBN: 9780128191064</div>
+        <div class="pub-sec" style="margin-top:22px"><i class="fas fa-book" style="color:var(--primary-light)"></i> Book Chapters <span class="cnt">3</span></div>
+        <div class="pub"><span class="pnum">1</span>B. Tekinerdogan, R. Mittal, R. Al-Ali, ..., <strong>Soumyadip Bandyopadhyay</strong>, et al., "A feature-based ontology for cyber physical systems", <strong>Chapter 3, Multi-Paradigm Modelling Approaches for Cyber-Physical, Elsevier</strong>. ISBN: 9780128191064</div>
+        <div class="pub"><span class="pnum">2</span>H. Giese, D. Blouin, R. Al-Ali, ..., <strong>Soumyadip Bandyopadhyay</strong>, et al., "An ontology for multiparadigm modelling", <strong>Chapter 4, Multi-Paradigm Modelling Approaches for Cyber-Physical, Elsevier</strong>. ISBN: 9780128191064</div>
+        <div class="pub"><span class="pnum">3</span>D. Blouin, R. Al-Ali, H. Giese, ..., <strong>Soumyadip Bandyopadhyay</strong>, et al., "An integrated ontology for multi-paradigm modelling for CPS", <strong>Chapter 5, Multi-Paradigm Modelling Approaches for Cyber-Physical, Elsevier</strong>. ISBN: 9780128191064</div>
 
         <div class="scholar-links">
-          <a href="https://dblp.org/pid/48/8657.html" target="_blank" class="scholar-btn btn-dblp"><i class="fas fa-database"></i> DBLP Profile</a>
-          <a href="https://scholar.google.co.in/citations?user=P_crwNgAAAAJ&hl=en" target="_blank" class="scholar-btn btn-scholar"><i class="fas fa-graduation-cap"></i> Google Scholar</a>
+          <a href="https://dblp.org/pid/48/8657.html" target="_blank" class="sch-btn btn-dblp"><i class="fas fa-database"></i> DBLP Profile</a>
+          <a href="https://scholar.google.co.in/citations?user=P_crwNgAAAAJ&hl=en" target="_blank" class="sch-btn btn-scholar"><i class="fas fa-graduation-cap"></i> Google Scholar</a>
         </div>
       </div>
     </section>
 
-    <!-- ===== TOOLS & TALKS ===== -->
+    <!-- TOOLS & TALKS -->
     <section id="tools">
-      <div class="section-header">
-        <div class="section-header-icon"><i class="fas fa-tools"></i></div>
-        <h2>Tools & Talks</h2>
-      </div>
+      <div class="sh"><div class="sh-icon"><i class="fas fa-tools"></i></div><h2>Tools &amp; Talks</h2></div>
 
       <div class="card">
         <div class="card-title"><i class="fas fa-microphone-alt" style="color:var(--primary-light)"></i> Invited Talks</div>
-        <div class="talk-item">
-          <div class="talk-num">1</div>
-          <div class="talk-text">"Behavioural Verification of Software Upgrade and Migration for PLC Code using Petri net based Model" — <strong>FM Update 2024</strong></div>
-        </div>
-        <div class="talk-item">
-          <div class="talk-num">2</div>
-          <div class="talk-text">"Industrial Application of Equivalence checking of programs" — <strong>RHPL 2024</strong> (co-located with FSTTCS 2023)</div>
-        </div>
-        <div class="talk-item">
-          <div class="talk-num">3</div>
-          <div class="talk-text">"Equivalence checking of Programs for Translation Validation" — <strong>FM Update 2023</strong></div>
-        </div>
-        <div class="talk-item">
-          <div class="talk-num">4</div>
-          <div class="talk-text">"Implementing a Path Based Equivalence Checker for Petri net based Models of Programs" — <strong>PERR 2022</strong></div>
-        </div>
-        <div class="talk-item">
-          <div class="talk-num">5</div>
-          <div class="talk-text">"Equivalence checking of Petri net based models of programs" — <strong>Telecom Paris, France 2022</strong></div>
-        </div>
-        <div class="talk-item">
-          <div class="talk-num">6</div>
-          <div class="talk-text">"Translation Validation of Loop involving Code Optimizing Transformations using Petri Net based Models" — <strong>FM Update 2021</strong></div>
-        </div>
-        <div class="talk-item">
-          <div class="talk-num">7</div>
-          <div class="talk-text">"Translation Validation using CPN Models of Programs" — <strong>CMI 2017</strong></div>
-        </div>
+        <div class="talk"><div class="tnum">1</div><div class="ttxt">"Behavioural Verification of Software Upgrade and Migration for PLC Code using Petri net based Model" — <strong>FM Update 2024</strong></div></div>
+        <div class="talk"><div class="tnum">2</div><div class="ttxt">"Industrial Application of Equivalence checking of programs" — <strong>RHPL 2024</strong> (co-located with FSTTCS 2023)</div></div>
+        <div class="talk"><div class="tnum">3</div><div class="ttxt">"Equivalence checking of Programs for Translation Validation" — <strong>FM Update 2023</strong></div></div>
+        <div class="talk"><div class="tnum">4</div><div class="ttxt">"Implementing a Path Based Equivalence Checker for Petri net based Models" — <strong>PERR 2022</strong></div></div>
+        <div class="talk"><div class="tnum">5</div><div class="ttxt">"Equivalence checking of Petri net based models of programs" — <strong>Telecom Paris, France 2022</strong></div></div>
+        <div class="talk"><div class="tnum">6</div><div class="ttxt">"Translation Validation of Loop involving Code Optimizing Transformations using PN Models" — <strong>FM Update 2021</strong></div></div>
+        <div class="talk"><div class="tnum">7</div><div class="ttxt">"Translation Validation using CPN Models of Programs" — <strong>CMI 2017</strong></div></div>
       </div>
 
       <div class="card">
         <div class="card-title"><i class="fas fa-code" style="color:var(--primary-light)"></i> Open Source Tools</div>
-        <div class="tool-card">
-          <div class="tool-icon"><i class="fas fa-balance-scale"></i></div>
-          <div>
-            <a href="https://github.com/soumyadipcsis/SamaTulyata" target="_blank" class="tool-name">SamaTulyata</a>
-            <div class="tool-desc">Petri net Based Formal Equivalence Checker for C Programs</div>
-          </div>
-          <a href="https://github.com/soumyadipcsis/SamaTulyata" target="_blank" class="tool-github"><i class="fab fa-github"></i> GitHub</a>
+        <div class="tool">
+          <div class="tool-ic"><i class="fas fa-balance-scale"></i></div>
+          <div><a href="https://github.com/soumyadipcsis/SamaTulyata" target="_blank" class="tool-name">SamaTulyata</a><div class="tool-desc">Petri net Based Formal Equivalence Checker for C Programs</div></div>
+          <a href="https://github.com/soumyadipcsis/SamaTulyata" target="_blank" class="gh-btn"><i class="fab fa-github"></i> GitHub</a>
         </div>
-        <div class="tool-card">
-          <div class="tool-icon"><i class="fas fa-shield-alt"></i></div>
-          <div>
-            <a href="https://github.com/soumyadipcsis/Antarbhukti" target="_blank" class="tool-name">Antarbhukti</a>
-            <div class="tool-desc">Software Upgradation Verifier for PLC Programs</div>
-          </div>
-          <a href="https://github.com/soumyadipcsis/Antarbhukti" target="_blank" class="tool-github"><i class="fab fa-github"></i> GitHub</a>
+        <div class="tool">
+          <div class="tool-ic"><i class="fas fa-shield-alt"></i></div>
+          <div><a href="https://github.com/soumyadipcsis/Antarbhukti" target="_blank" class="tool-name">Antarbhukti</a><div class="tool-desc">Software Upgradation Verifier for PLC Programs</div></div>
+          <a href="https://github.com/soumyadipcsis/Antarbhukti" target="_blank" class="gh-btn"><i class="fab fa-github"></i> GitHub</a>
         </div>
-        <div class="tool-card">
-          <div class="tool-icon"><i class="fas fa-check-circle"></i></div>
-          <div>
-            <a href="https://github.com/soumyadipcsis/autoval" target="_blank" class="tool-name">AutoVal</a>
-            <div class="tool-desc">Automated Evaluation Software for Computer Programming Courses</div>
-          </div>
-          <a href="https://github.com/soumyadipcsis/autoval" target="_blank" class="tool-github"><i class="fab fa-github"></i> GitHub</a>
+        <div class="tool">
+          <div class="tool-ic"><i class="fas fa-check-circle"></i></div>
+          <div><a href="https://github.com/soumyadipcsis/autoval" target="_blank" class="tool-name">AutoVal</a><div class="tool-desc">Automated Evaluation Software for Computer Programming Courses</div></div>
+          <a href="https://github.com/soumyadipcsis/autoval" target="_blank" class="gh-btn"><i class="fab fa-github"></i> GitHub</a>
         </div>
       </div>
 
       <div class="card">
         <div class="card-title"><i class="fab fa-youtube" style="color:#e63946"></i> Videos</div>
-        <a href="https://www.youtube.com/watch?v=GMYeM2SKdXQ&t=77s" target="_blank" style="text-decoration:none">
-          <div class="video-card">
-            <div class="video-thumb"><i class="fab fa-youtube"></i></div>
-            <div class="video-info">
-              <div class="video-title">Formal Method Update Meeting 2021</div>
-              <div class="video-sub">▶ Watch on YouTube</div>
-            </div>
-          </div>
+        <a href="https://www.youtube.com/watch?v=GMYeM2SKdXQ&t=77s" target="_blank" class="vcard">
+          <div class="vthumb"><i class="fab fa-youtube"></i></div>
+          <div class="vinfo"><div class="vtitle">Formal Method Update Meeting 2021</div><div class="vsub">▶ Watch on YouTube</div></div>
         </a>
       </div>
     </section>
 
-    <!-- ===== HONOURS ===== -->
+    <!-- HONOURS -->
     <section id="honours">
-      <div class="section-header">
-        <div class="section-header-icon"><i class="fas fa-trophy"></i></div>
-        <h2>Achievements & Professional Activities</h2>
-      </div>
+      <div class="sh"><div class="sh-icon"><i class="fas fa-trophy"></i></div><h2>Achievements &amp; Professional Activities</h2></div>
 
       <div class="card">
-        <div class="card-title"><i class="fas fa-award" style="color:var(--gold)"></i> Honours & Awards</div>
-        <div class="award-item">
-          <div class="award-icon"><i class="fas fa-medal"></i></div>
-          <div class="award-text">Finalist — Process Automation Hackathon 2024</div>
-        </div>
-        <div class="award-item">
-          <div class="award-icon"><i class="fas fa-trophy"></i></div>
-          <div class="award-text">Best Paper Award — ICSOFT 2021</div>
-        </div>
-        <div class="award-item">
-          <div class="award-icon"><i class="fas fa-star"></i></div>
-          <div class="award-text">Selected in 7th Heidelberg Laureate Forum (HLF) as Top 50 Young Researcher in Computer Science</div>
-        </div>
-        <div class="award-item">
-          <div class="award-icon"><i class="fas fa-microscope"></i></div>
-          <div class="award-text">Post-Doctoral Fellowship — Hasso Plattner Institute, Germany, 2017</div>
-        </div>
-        <div class="award-item">
-          <div class="award-icon"><i class="fas fa-flask"></i></div>
-          <div class="award-text">TCS Innovation Lab Research Fellowship, 2012</div>
-        </div>
-        <div class="award-item">
-          <div class="award-icon"><i class="fas fa-globe"></i></div>
-          <div class="award-text">Czech Republic Scholarship, 2007</div>
-        </div>
+        <div class="card-title"><i class="fas fa-award" style="color:var(--gold)"></i> Honours &amp; Awards</div>
+        <div class="award"><div class="award-ic"><i class="fas fa-medal"></i></div><div class="award-txt">Finalist — Process Automation Hackathon 2024</div></div>
+        <div class="award"><div class="award-ic"><i class="fas fa-trophy"></i></div><div class="award-txt">Best Paper Award — ICSOFT 2021</div></div>
+        <div class="award"><div class="award-ic"><i class="fas fa-star"></i></div><div class="award-txt">Selected in 7th Heidelberg Laureate Forum (HLF) — Top 50 Young Researcher in CS</div></div>
+        <div class="award"><div class="award-ic"><i class="fas fa-microscope"></i></div><div class="award-txt">Post-Doctoral Fellowship — Hasso Plattner Institute, Germany, 2017</div></div>
+        <div class="award"><div class="award-ic"><i class="fas fa-flask"></i></div><div class="award-txt">TCS Innovation Lab Research Fellowship, 2012</div></div>
+        <div class="award"><div class="award-ic"><i class="fas fa-globe"></i></div><div class="award-txt">Czech Republic Scholarship, 2007</div></div>
       </div>
 
-      <div class="activity-grid">
-        <div class="activity-card">
+      <div class="act-grid">
+        <div class="act-card">
           <h4><i class="fas fa-search" style="color:var(--primary-light)"></i> Reviewer</h4>
-          <ul>
-            <li>CAV 2014</li>
-            <li>EMSOFT 2015</li>
-            <li>DAC 2020</li>
-            <li>ACM TOSEAM</li>
-            <li>Acta Informatica</li>
-          </ul>
+          <ul><li>CAV 2014</li><li>EMSOFT 2015</li><li>DAC 2020</li><li>ACM TOSEAM</li><li>Acta Informatica</li></ul>
         </div>
-        <div class="activity-card">
+        <div class="act-card">
           <h4><i class="fas fa-users-cog" style="color:var(--primary-light)"></i> Program Committee</h4>
-          <ul>
-            <li>ISEC 2018–2025</li>
-            <li>ICSOFT 2018–2023</li>
-            <li>VLSI D 2023</li>
-            <li>MPM4CPS 2021–2023</li>
-            <li>ModeVa 2023–2024</li>
-            <li>VDAT 2025</li>
-          </ul>
+          <ul><li>ISEC 2018–2025</li><li>ICSOFT 2018–2023</li><li>VLSI D 2023</li><li>MPM4CPS 2021–2023</li><li>ModeVa 2023–2024</li><li>VDAT 2025</li></ul>
         </div>
-        <div class="activity-card">
+        <div class="act-card">
           <h4><i class="fas fa-sitemap" style="color:var(--primary-light)"></i> Organizer</h4>
           <ul>
             <li>PERR 2022 (co-located CAV 2022)</li>
@@ -1338,50 +983,38 @@
             <li><a href="https://www.youtube.com/watch?v=HQSDLmUEcBM&list=PLdPHzrRJipiw-lVhZh1BL4UmvFNyM5V1T" target="_blank">CTiCPS 2020 ↗</a></li>
           </ul>
         </div>
-        <div class="activity-card">
+        <div class="act-card">
           <h4><i class="fas fa-id-card" style="color:var(--primary-light)"></i> Memberships</h4>
-          <ul>
-            <li>Senior IEEE Member</li>
-            <li>ACM Member</li>
-          </ul>
+          <ul><li>Senior IEEE Member</li><li>ACM Member</li></ul>
         </div>
       </div>
     </section>
 
   </main>
 
-  <footer>
+  <!-- FOOTER -->
+  <footer id="footer">
     © 2025 Dr. Soumyadip Bandyopadhyay · ABB Corporate Research · All Rights Reserved.
   </footer>
+
 </div>
 
 <script>
-  const menuItems = document.querySelectorAll('.menu-item');
-  const sections = document.querySelectorAll('main section');
-  const topbarTitle = document.querySelector('.topbar-title');
-
-  const sectionTitles = {
-    aboutme: 'About Me',
-    education: 'Education & Experience',
-    research: 'Research & Projects',
-    researchshowcase: 'Publications',
-    tools: 'Tools & Talks',
-    honours: 'Achievements'
-  };
+  const titles = { aboutme:'About Me', education:'Education & Experience', research:'Research & Projects', researchshowcase:'Publications', tools:'Tools & Talks', honours:'Achievements' };
+  const menuItems = document.querySelectorAll('.mi');
+  const sections  = document.querySelectorAll('#main section');
+  const tbTitle   = document.getElementById('tb-title');
 
   menuItems.forEach(item => {
     item.addEventListener('click', () => {
       menuItems.forEach(i => i.classList.remove('active'));
       item.classList.add('active');
       sections.forEach(s => s.classList.remove('active'));
-      const targetId = item.getAttribute('data-target');
-      const targetSection = document.getElementById(targetId);
-      if (targetSection) {
-        targetSection.classList.add('active');
-        // Scroll content to top
-        document.querySelector('main').scrollTo({ top: 0, behavior: 'smooth' });
-      }
-      if (topbarTitle) topbarTitle.textContent = sectionTitles[targetId] || 'Research Portfolio';
+      const id = item.getAttribute('data-target');
+      const target = document.getElementById(id);
+      if (target) target.classList.add('active');
+      if (tbTitle) tbTitle.textContent = titles[id] || 'Portfolio';
+      document.getElementById('main').scrollTo({ top:0, behavior:'smooth' });
     });
   });
 </script>

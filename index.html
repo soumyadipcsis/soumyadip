@@ -650,6 +650,36 @@
     .act-card ul li a { color:var(--primary-light); text-decoration:none; }
     .act-card ul li a:hover { text-decoration:underline; }
 
+    /* ── TEACHING ── */
+    .course-hero {
+      background: linear-gradient(135deg,#0f2744 0%,#1e56a0 100%);
+      border-radius:14px; padding:22px 24px; color:#fff; margin-bottom:20px;
+      display:flex; align-items:center; gap:16px;
+    }
+    .course-icon {
+      width:52px; height:52px; border-radius:12px; background:rgba(255,255,255,.14);
+      display:flex; align-items:center; justify-content:center; font-size:1.3rem; flex-shrink:0;
+    }
+    .course-hero h3 { font-family:'Poppins',sans-serif; font-size:1.05rem; margin-bottom:4px; }
+    .course-hero p { font-size:.76rem; color:rgba(255,255,255,.78); line-height:1.5; }
+    .course-meta { display:flex; flex-wrap:wrap; gap:7px; margin-top:9px; }
+    .course-meta span { background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.2); padding:3px 9px; border-radius:20px; font-size:.64rem; }
+    .lecture-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:13px; }
+    .lecture { background:#fff; border:1px solid var(--border); border-radius:11px; padding:15px 16px; transition:.2s; }
+    .lecture:hover { box-shadow:0 4px 14px rgba(0,0,0,.08); transform:translateY(-1px); }
+    .lecture-head { display:flex; align-items:flex-start; gap:10px; margin-bottom:9px; }
+    .lecture-num { width:30px; height:30px; border-radius:8px; background:linear-gradient(135deg,var(--primary-light),var(--primary)); color:#fff; display:flex; align-items:center; justify-content:center; font-size:.68rem; font-weight:700; flex-shrink:0; }
+    .lecture h4 { font-size:.84rem; color:var(--primary); margin-bottom:2px; }
+    .lecture-date { font-size:.64rem; color:var(--muted); }
+    .lecture p { font-size:.73rem; color:var(--muted); line-height:1.55; margin-bottom:11px; }
+    .resource-row { display:flex; flex-wrap:wrap; gap:7px; }
+    .resource-btn { display:inline-flex; align-items:center; gap:5px; padding:6px 9px; border-radius:7px; font-size:.66rem; font-weight:700; text-decoration:none; border:1px solid var(--border); }
+    .slide-btn { background:#eff6ff; color:#1e40af; border-color:#bfdbfe; }
+    .read-btn { background:#f0fdf4; color:#166534; border-color:#bbf7d0; }
+    .resource-btn:hover { filter:brightness(.96); transform:translateY(-1px); }
+    .course-note { background:#fffbeb; border:1px solid #fde68a; border-radius:10px; padding:12px 14px; font-size:.73rem; color:#92400e; line-height:1.55; }
+    .week-title { font-family:'Poppins',sans-serif; color:var(--primary); font-size:.86rem; margin:18px 0 10px; }
+
     /* ── RESPONSIVE ── */
     @media(max-width:768px){
       :root { --sidebar-w: 0px; --topbar-h: auto; }
@@ -721,6 +751,7 @@
       <a class="mi" data-target="researchshowcase"><i class="fas fa-book-open"></i> Publications</a>
       <a class="mi" data-target="tools"><i class="fas fa-tools"></i> Tools & Talks</a>
       <a class="mi" data-target="honours"><i class="fas fa-trophy"></i> Achievements</a>
+      <a class="mi" data-target="teaching"><i class="fas fa-chalkboard-teacher"></i> Teaching</a>
     </nav>
 
     <div class="sidebar-social">
@@ -996,7 +1027,47 @@
         </div>
       </div>
     </section>
-  
+
+    <!-- TEACHING -->
+    <section id="teaching">
+      <div class="sh"><div class="sh-icon"><i class="fas fa-chalkboard-teacher"></i></div><h2>Teaching</h2></div>
+
+      <div class="course-hero">
+        <div class="course-icon"><i class="fas fa-desktop"></i></div>
+        <div>
+          <h3>Operating Systems Lab</h3>
+          <p>Course materials, lecture slides, lab resources, and reading materials.</p>
+          <div class="course-meta"><span>💻 OS Lab</span><span>📚 Slides + Reading</span><span>🧪 Laboratory</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><i class="fas fa-info-circle" style="color:var(--primary-light)"></i> Course Information</div>
+        <div class="course-note"><strong>How this page is organised:</strong> Each lecture has two resource links — <strong>Slides</strong> for the material used in class and <strong>Reading Material</strong> for additional preparation/revision. Replace the placeholder filenames below with your actual PDF filenames.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><i class="fas fa-list-ol" style="color:var(--primary-light)"></i> Lecture Materials</div>
+        <div class="week-title">Operating Systems Lab — Lecture / Lab Sessions</div>
+        <div class="lecture-grid">
+          <div class="lecture"><div class="lecture-head"><div class="lecture-num">01</div><div><h4>Introduction to Operating Systems</h4><div class="lecture-date">Lecture 01</div></div></div><p>Introduction to OS concepts, system software, and the role of Linux in the OS laboratory.</p><div class="resource-row"><a class="resource-btn slide-btn" href="teaching/os-lab/slides/lecture-01-introduction.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Slides</a><a class="resource-btn read-btn" href="teaching/os-lab/reading/lecture-01-reading.pdf" target="_blank"><i class="fas fa-book-reader"></i> Reading Material</a></div></div>
+          <div class="lecture"><div class="lecture-head"><div class="lecture-num">02</div><div><h4>Linux Basics &amp; Shell Commands</h4><div class="lecture-date">Lecture 02</div></div></div><p>Essential Linux commands, files, directories, permissions, pipes, and shell interaction.</p><div class="resource-row"><a class="resource-btn slide-btn" href="teaching/os-lab/slides/lecture-02-linux-basics.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Slides</a><a class="resource-btn read-btn" href="teaching/os-lab/reading/lecture-02-reading.pdf" target="_blank"><i class="fas fa-book-reader"></i> Reading Material</a></div></div>
+          <div class="lecture"><div class="lecture-head"><div class="lecture-num">03</div><div><h4>Processes &amp; Process Management</h4><div class="lecture-date">Lecture 03</div></div></div><p>Process creation, execution, termination, process states, and basic process-management commands.</p><div class="resource-row"><a class="resource-btn slide-btn" href="teaching/os-lab/slides/lecture-03-processes.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Slides</a><a class="resource-btn read-btn" href="teaching/os-lab/reading/lecture-03-reading.pdf" target="_blank"><i class="fas fa-book-reader"></i> Reading Material</a></div></div>
+          <div class="lecture"><div class="lecture-head"><div class="lecture-num">04</div><div><h4>CPU Scheduling</h4><div class="lecture-date">Lecture 04</div></div></div><p>Scheduling concepts and practical understanding of common CPU scheduling algorithms.</p><div class="resource-row"><a class="resource-btn slide-btn" href="teaching/os-lab/slides/lecture-04-cpu-scheduling.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Slides</a><a class="resource-btn read-btn" href="teaching/os-lab/reading/lecture-04-reading.pdf" target="_blank"><i class="fas fa-book-reader"></i> Reading Material</a></div></div>
+          <div class="lecture"><div class="lecture-head"><div class="lecture-num">05</div><div><h4>Concurrency &amp; Parallelism</h4><div class="lecture-date">Lecture 05</div></div></div><p>Concurrency, parallelism, synchronization concepts, and practical examples.</p><div class="resource-row"><a class="resource-btn slide-btn" href="teaching/os-lab/slides/lecture-05-concurrency.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Slides</a><a class="resource-btn read-btn" href="teaching/os-lab/reading/lecture-05-reading.pdf" target="_blank"><i class="fas fa-book-reader"></i> Reading Material</a></div></div>
+          <div class="lecture"><div class="lecture-head"><div class="lecture-num">06</div><div><h4>CPU Read &amp; Write Cycles</h4><div class="lecture-date">Lecture 06</div></div></div><p>Basic CPU and memory interaction, read/write cycles, and related OS-level concepts.</p><div class="resource-row"><a class="resource-btn slide-btn" href="teaching/os-lab/slides/lecture-06-read-write-cycles.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Slides</a><a class="resource-btn read-btn" href="teaching/os-lab/reading/lecture-06-reading.pdf" target="_blank"><i class="fas fa-book-reader"></i> Reading Material</a></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><i class="fas fa-folder-open" style="color:var(--primary-light)"></i> Course Resources</div>
+        <div class="resource-row">
+          <a class="resource-btn slide-btn" href="teaching/os-lab/OS-Lab-Syllabus.pdf" target="_blank"><i class="fas fa-file-alt"></i> Course Syllabus</a>
+          <a class="resource-btn read-btn" href="teaching/os-lab/OS-Lab-Lab-Manual.pdf" target="_blank"><i class="fas fa-book"></i> Lab Manual</a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- FOOTER -->
@@ -1007,7 +1078,7 @@
 </div>
 
 <script>
-  const titles = { aboutme:'About Me', education:'Education & Experience', research:'Research & Projects', researchshowcase:'Publications', tools:'Tools & Talks', honours:'Achievements' };
+  const titles = { aboutme:'About Me', education:'Education & Experience', research:'Research & Projects', researchshowcase:'Publications', tools:'Tools & Talks', honours:'Achievements', teaching:'Teaching' };
   const menuItems = document.querySelectorAll('.mi');
   const sections  = document.querySelectorAll('#main section');
   const tbTitle   = document.getElementById('tb-title');
